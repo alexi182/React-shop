@@ -1,0 +1,16 @@
+[
+  {
+    "name": "SAMSUNG Galaxy Tab A 8.0",
+    "link": "/product/samsung-galaxy-tab-a-80",
+    "price": {
+      "prefix": "от",
+      "value": 12900,
+      "postfix": "руб."
+    },
+    "img": {
+      "src": "https://static-eu.insales.ru/images/products/1/6325/107133109/large_samsung_galaxy_tab.jpg",
+      "alt": "1",
+      "title": "2"
+    }
+  }
+]

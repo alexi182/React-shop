@@ -1,0 +1,65 @@
+$green: green;
+$small: 32px;
+
+.top-panel {
+   /* background: $green;*/
+}
+
+
+h1,h2,h3,h4,h5,h6 {
+   font-weight: bold;
+}
+
+.payment-block {
+   margin-bottom: 35px;
+   p{
+      margin-bottom: 0;
+   }
+}
+
+html,
+body {
+  height: 100%;
+}
+#page {
+   height: 100%;
+   .page {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+   }
+}
+
+.page-wrapper {
+  flex: 1 0 auto;
+}
+
+.footer {
+  flex: 0 0 auto;
+}
+
+.editor {
+   p {
+      font-size: 15px;
+   }
+}
+
+.image-block {
+   margin-top: 1rem;
+   margin-bottom: 3rem;
+}
+
+.editor__link {
+   display: inline-block;
+   font-size: 17px;
+   margin-left: 5px;
+}
+
+.editor__pic {
+   width: 1200px;
+   height: 450px;
+}
+
+.main-menu-wrapper {
+   margin-bottom: 20px;
+}
