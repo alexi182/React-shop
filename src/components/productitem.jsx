@@ -1,6 +1,6 @@
 import {Link} from 'react-router';
 
-export default function (props) {
+export default function(props) {
 
    let prefix = props.price.prefix ? `${props.price.prefix} ` : '';
    let price = `${props.price.value} ${props.price.postfix}`;

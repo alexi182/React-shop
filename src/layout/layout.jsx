@@ -7,7 +7,6 @@ import MenuItem from '../components/menu/menu-item';
 const menu = require('../json/mainmenu.json');
 
 export default class Layout extends React.Component {
-
    constructor(props) {
       super(props);
    }
@@ -18,9 +17,9 @@ export default class Layout extends React.Component {
              <div className="top-panel">
                 <div className="container">
                    <div className="top-panel-inner row flex-between flex-middle">
-
                       <MenuContainer classList="top-menu-wrapper cell- hide-sm">
                          <Menu menuType={'top'}>
+
                             {/*{ menu.map((item, index) =>*/}
                                {/*<MenuItem name={item.name} href={`/${item.link}`} key={index} />) };*/}
 
