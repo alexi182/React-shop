@@ -76,7 +76,6 @@ export default class SideBar extends React.Component {
                          <i className="icon clear-icon ion-ios-close-outline"></i>
                       </button>
                    </div>
-
                    <div className="filter-items-wrapper">
                       <ul className="filter-items-list scrollable">
                          <li className="filter-item">

@@ -3,7 +3,7 @@ import {Link} from 'react-router';
 export default class MenuItem extends React.Component{
    render() {
 
-      console.log(this.props.children);
+      /*console.log(this.props.children);*/
 
       return (
           <li className={`${this.props.menuType}-menu-item menu-item level-${this.props.level}`}>
@@ -22,7 +22,7 @@ export default class MenuItem extends React.Component{
 }
 
 MenuItem.propTypes = {
-   menuType: PropTypes.string.isRequired,
+   /*menuType: PropTypes.string.isRequired,*/
    level: PropTypes.number.isRequired,
    href: PropTypes.string.isRequired,
    name: PropTypes.string.isRequired
