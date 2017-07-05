@@ -16,7 +16,7 @@ export default class ProductPage extends React.Component{
                          <h1 className="page-header">
                             Планшеты
                          </h1>
-                      </div>
+                      </div>G
                    </div>
 
                    <div className="collection-toolbar is-top">

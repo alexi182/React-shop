@@ -1,48 +1,88 @@
 [
   {
     "filterName": "Цвет",
-    "filterData": [
+    "color": [
       {
-        "color": "Чёрный"
+        "item": "Чёрный"
       },
       {
-        "color": "Серый"
+        "item": "Серый"
       },
       {
-        "color": "Золотой"
+        "item": "Золотой"
       },
       {
-        "color": "Белый"
+        "item": "Белый"
       }
     ]
   },
 
   {
     "filterName": "Диагональ",
-    "filterData": [
+    "diag": [
       {
-        "color": "7.9"
+        "item": "7.9"
       },
       {
-        "color": "8"
+        "item": "8"
       },
       {
-        "color": "10"
+        "item": "10"
       }
     ]
   },
-
   {
-    "filter": "Разрешение экрана",
-    "color": {
-      "item1": "2048 x 1536",
-      "item2": "1980 x 1080"
-    }
+    "filterName": "Разрешение экрана",
+    "screen": [
+      {
+        "item": "2048 x 1536"
+      },
+      {
+        "item": "1980 x 1080"
+      }
+    ]
   },
   {
-    "filter": "Гарантия",
-    "color": {
-      "item1": "1 год"
-    }
+    "filterName": "Гарантия",
+    "garanty": [
+      {
+        "item": "1 год"
+      }
+    ]
+  },
+  {
+    "filterName": "Wi-Fi соединение",
+    "wifi": [
+      {
+        "item": "да"
+      }
+    ]
+  },
+  {
+    "filterName": "Поддержка SIM-карты",
+    "sim": [
+      {
+        "item": "Nano-SIM"
+      }
+    ]
+  },
+  {
+    "filterName": "Ёмкость аккумулятора, мАч",
+    "accum": [
+      {
+        "item": "5124"
+      }
+    ]
+  },
+  {
+    "filterName": "Объём оперативной памяти, Гб",
+    "accum": [
+      {
+        "item": "4"
+      },
+      {
+        "item": "8"
+      }
+    ]
   }
 ]

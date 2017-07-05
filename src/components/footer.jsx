@@ -18,7 +18,6 @@ export default class Footer extends React.Component {
                       </Menu>
                    </MenuContainer>
 
-
                    <div className="footer-block social-menu-wrapper cell-6 cell-12-sm cell-12-xs flex-first-sm text-center">
                    </div>
 
@@ -43,7 +42,6 @@ export default class Footer extends React.Component {
                    <div className="footer-block insales-copyright cell-6 cell-12-sm text-right text-center-sm">
                       <a href="http://www.insales.ru" target="_blank">Сделано в InSales</a>
                    </div>
-
                 </div>
              </div>
           </footer>
