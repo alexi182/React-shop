@@ -7,7 +7,7 @@ export default function(props) {
 
    return (
        <div className="product-card-wrapper cell-4 cell-6-md cell-12-mc">
-          <Link to={props.link}  className="product-card product-link ">
+          <Link to={props.link} className="product-card product-link ">
              <div className="card-inner">
                 <div className="product-photo">
                    <div className="product-link image-container is-square is-cover">

@@ -1,4 +1,5 @@
 import BreadCrumbs from '../components/breadcrumbs';
+const products = require('../json/products.json');
 
 export default class ProductPageItem extends React.Component{
    constructor(props) {
@@ -15,7 +16,8 @@ export default class ProductPageItem extends React.Component{
                 <div className="decorated-title">
                    <div className="page-header-wrapper">
                       <h1 className="page-header">
-                         SAMSUNG Galaxy Tab A 8.0
+                         {JSON.parse(products.name)}
+
                       </h1>
                    </div>
                 </div>

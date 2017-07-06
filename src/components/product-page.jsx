@@ -13,16 +13,14 @@ export default class ProductPage extends React.Component{
                 <div className="decorated-title-wrapper">
                    <div className="decorated-title">
                       <div className="page-header-wrapper">
-                         <h1 className="page-header">
-                            Планшеты
-                         </h1>
-                      </div>G
+                         <h1 className="page-header">Планшеты</h1>
+                      </div>
                    </div>
 
                    <div className="collection-toolbar is-top">
                       <button type="button" className="button hide show-sm open-filter js-open-filter is-primary">Фильтр</button>
 
-                      <form className="collection-order-wrapper " action="#" method="get">
+                      <form className="collection-order-wrapper" action="#" method="get">
                          <div className="collection-order is-order  ">
                             <label className="label-field hide">Сортировка</label>
 
