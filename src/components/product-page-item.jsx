@@ -16,8 +16,7 @@ export default class ProductPageItem extends React.Component{
                 <div className="decorated-title">
                    <div className="page-header-wrapper">
                       <h1 className="page-header">
-                         {JSON.parse(products.name)}
-
+                         SAMSUNG Galaxy Tab A 8.0
                       </h1>
                    </div>
                 </div>

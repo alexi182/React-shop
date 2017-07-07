@@ -31,7 +31,7 @@ ReactDOM.render(
              <Route path="/payment" component={Payment} />
              <Route path="/product/:name" component={ProductPageItem} />
           </Route>
-          <Redirect from="*" to="/notfound" />
+          <Redirect from="*" to="/notfound" component={NotFoundPage} />
        </Router>
     </Provider>
     , page);
