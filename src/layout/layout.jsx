@@ -3,12 +3,23 @@ import Footer from '../components/footer';
 import Menu from '../components/menu/menu';
 import MenuContainer from '../components/menu/menu-container';
 import MenuItem from '../components/menu/menu-item';
+import {autobind} from 'core-decorators';
+import * as actions from '../actions/cart';
+import { connect } from 'react-redux';
 
 const menu = require('../json/mainmenu.json');
+@connect( store => {
+   return store.service;
+})
 
+@autobind()
 export default class Layout extends React.Component {
    constructor(props) {
       super(props);
+   }
+
+   get totalPrice() {
+      return
    }
 
    render() {
@@ -44,7 +55,7 @@ export default class Layout extends React.Component {
                              <span className="shopcart-icon fa fa-bar-chart">
                              </span>
                             <span className="hide-sm">Сравнение:</span>
-                            <div className="widget-count"></div>
+                            <div className="widget-count">{this.totalPrice}12 112 р.</div>
                          </a>
                       </div>
                       <div className="shopcart-widget cell-">
