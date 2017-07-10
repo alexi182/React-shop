@@ -1,8 +1,16 @@
 import Menu from '../components/menu/menu';
 import MenuContainer from '../components/menu/menu-container';
 import MenuItem from '../components/menu/menu-item';
+import Filter from '../components/filter';
 
 const sidebarData = require('../json/filters-photos.json');
+
+/*export const colors = {
+ 1: "Чёрный",
+ 2: "Cерый",
+ 3: "Золотой",
+ 4: "Белый"
+ }*/
 
 export default class SideBar extends React.Component {
    render() {
@@ -34,29 +42,7 @@ export default class SideBar extends React.Component {
                 </div>
 
                 {sidebarData.map((item, index) => (
-                        <div key={index}>
-                           <div className="filter is-open">
-                              <div className="filter-control">
-                                 <button className="filter-toggle is-active" type="button">
-                                    <span className="filter-name" >{item.filterName}</span>
-                                    {/*<span>{item.color.item}</span>*/}
-                                 </button>
-
-                                 {/*  <button className="filter-clear button" type="button">
-                                  <i className="icon clear-icon ion-ios-close-outline"></i>
-                                  </button>*/}
-                              </div>
-                           </div>
-
-                          {/* <div className="filter-items-wrapper">
-                              <ul className="filter-items-list scrollable">
-                                 <li className="filter-item">
-                                    <input className="filter-field checkbox-field" type="checkbox"  />
-                                    <label className="filter-label checkbox-label">{item.color}</label>
-                                 </li>
-                              </ul>
-                           </div>*/}
-                        </div>
+                        <Filter {...item} key={index} />
                     )
                 )}
 

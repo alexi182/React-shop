@@ -18,9 +18,9 @@ export default class Layout extends React.Component {
       super(props);
    }
 
-   get totalPrice() {
-      return
-   }
+   // get totalPrice() {
+   //    return
+   // }
 
    render() {
       return (
@@ -55,7 +55,7 @@ export default class Layout extends React.Component {
                              <span className="shopcart-icon fa fa-bar-chart">
                              </span>
                             <span className="hide-sm">Сравнение:</span>
-                            <div className="widget-count">{this.totalPrice}12 112 р.</div>
+                            <div className="widget-count">{/*{this.totalPrice}*/}2</div>
                          </a>
                       </div>
                       <div className="shopcart-widget cell-">
@@ -64,7 +64,7 @@ export default class Layout extends React.Component {
                                <i className="fa fa-shopping-cart"></i>
                             </span>
                             <span className="hide-sm">Корзина:</span>
-                            <div className="widget-count"></div>
+                            <div className="widget-count">{/*{`${this.totalPrice}р.`}*/}12 112 р.</div>
                          </a>
                       </div>
                    </div>

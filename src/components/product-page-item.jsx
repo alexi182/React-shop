@@ -4,7 +4,17 @@ const products = require('../json/products.json');
 export default class ProductPageItem extends React.Component{
    constructor(props) {
       super(props);
-      console.log(this.props);
+   console.log(props);
+      let product = products.find(p => p.id == this.props.params.id);  //добвили в конце видео о выводе товара
+
+      if(!product) {      //добвили в конце видео о выводе товара
+         this.props.router.go('/notfound');
+         return;
+      }
+
+      this.state = {   //добвили в конце видео о выводе товара
+          ...product
+      }
    }
 
    render() {
@@ -16,7 +26,7 @@ export default class ProductPageItem extends React.Component{
                 <div className="decorated-title">
                    <div className="page-header-wrapper">
                       <h1 className="page-header">
-                         SAMSUNG Galaxy Tab A 8.0
+                         {this.state.name}   //добвили в конце видео о выводе товара
                       </h1>
                    </div>
                 </div>
