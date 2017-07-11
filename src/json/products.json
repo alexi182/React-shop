@@ -2,7 +2,7 @@
   {
     "id": "samsung-galaxy-tab-a-80",
     "name": "SAMSUNG Galaxy Tab A 8.0",
-    "link": "/product/samsung-galaxy-tab-a-802",
+    "link": "/product/samsung-galaxy-tab-a-80",
     "price": {
       "prefix": "от",
       "value": 12900,
@@ -12,9 +12,18 @@
       "src": "https://static-eu.insales.ru/images/products/1/6325/107133109/large_samsung_galaxy_tab.jpg",
       "alt": "1",
       "title": "2"
-    }
+    },
+    "color": [
+      {
+        "item": "Чёрный"
+      },
+      {
+        "item": "Белы
+      }
+    ]
   },
   {
+    "id": "planshet-apple-ipad-mini-with-retina-display",
     "name": "Планшет APPLE iPad mini with Retina display",
     "link": "/product/planshet-apple-ipad-mini-with-retina-display",
     "price": {
@@ -25,9 +34,18 @@
       "src": "https://static-eu.insales.ru/images/products/1/7130/102226906/%D0%91%D0%B5%D0%B7_%D0%BD%D0%B0%D0%B7%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F.jpg",
       "alt": "1",
       "title": "2"
-    }
+    },
+    "color": [
+      {
+        "item": "Чёрный"
+      },
+      {
+        "item": "Белый"
+      }
+    ]
   },
   {
+    "id": "apple-ipad-air",
     "name": "Apple iPad Air",
     "link": "/product/apple-ipad-air",
     "price": {
@@ -38,6 +56,14 @@
       "src": "https://static-eu.insales.ru/images/products/1/2865/101960497/large_Apple_iPad_Air.jpg",
       "alt": "1",
       "title": "2"
-    }
+    },
+    "color": [
+      {
+        "item": "Чёрный"
+      },
+      {
+        "item": "Белый"
+      }
+    ]
   }
 ]

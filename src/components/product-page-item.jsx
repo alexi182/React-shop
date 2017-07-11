@@ -4,15 +4,17 @@ const products = require('../json/products.json');
 export default class ProductPageItem extends React.Component{
    constructor(props) {
       super(props);
-   console.log(props);
-      let product = products.find(p => p.id == this.props.params.id);  //добвили в конце видео о выводе товара
+      console.log(props);
 
-      if(!product) {      //добвили в конце видео о выводе товара
-         this.props.router.go('/notfound');
-         return;
-      }
+      let product = products.find(p => p.id == this.props.params.id);
 
-      this.state = {   //добвили в конце видео о выводе товара
+      // if(!product) {      //добвили в конце видео о выводе товара
+      //    this.props.router.go('/notfound');
+      //    return;
+
+      // }
+
+      this.state = {
           ...product
       }
    }
@@ -26,7 +28,7 @@ export default class ProductPageItem extends React.Component{
                 <div className="decorated-title">
                    <div className="page-header-wrapper">
                       <h1 className="page-header">
-                         {this.state.name}   //добвили в конце видео о выводе товара
+                         {this.state.name}
                       </h1>
                    </div>
                 </div>
@@ -36,14 +38,18 @@ export default class ProductPageItem extends React.Component{
                 <div className="product-content-wrapper cell-7 cell-12-sm">
                    <div className="product-introtext on-page editor">Планшет Samsung Galaxy Tab 3 Lite доступен по демократичной цене, особенно приятной для устройства данной марки. Это бюджетный вариант предыдущей, третьей, версии девайса, не уступающий ей в функциональности. Модель качественно собрана, оснащена семидюймовым дисплеем с разрешением 1024х600 пикселей и производительным двухъядерным процессором. Она предназначена для комфортного веб-серфинга, общения, развлечений и станет отличным выбором для активного пользователя</div>
 
-                   <form className="product-form" action="/cart_items">
+                   <form className="product-form" action="#">
                       <div className="option-selectors">
                          <div className="option-selector">
                             <div className="option option-cvet is-select">
                                <label className="option-label">Цвет</label>
                                <select className="option-values">
-                                  <option value="0" selected="selected">Черный</option>
-                                  <option value="4">Белый</option>
+                                  {/*<option value="0" selected="selected">Черный</option>*/}
+                                  {/*<option value="4">Белый</option>*/}
+                                  { products.map((p, index) =>
+                                      <option value={p.item} key={index}>{p.item}</option>
+
+                                  )}
                                </select>
                             </div>
                          </div>

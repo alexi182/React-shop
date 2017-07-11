@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 
 const menu = require('../json/mainmenu.json');
 @connect( store => {
-   return store.service;
+   return store.cart;
 })
 
 @autobind()
