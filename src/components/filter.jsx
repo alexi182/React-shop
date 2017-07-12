@@ -33,7 +33,7 @@ export default class Filter extends React.Component{
    select(id) {
       let filters = this.state.filters.slice();
 
-      let filter = filters.find(f => f.id == id );
+      let filter = filters.find(f => f.id == id);
 
       if(filter) {
          if (!filter.selected) {
