@@ -19,8 +19,8 @@ export default class Filter extends React.Component{
       super(props);
 
       this.state = {
-         filters: this.props.items,
-         opened: false
+         filters: this.props.items, //передал из sidebar.jsx  45с.
+         opened: false //начальное состоние
       }
    }
 
@@ -36,10 +36,12 @@ export default class Filter extends React.Component{
       let filter = filters.find(f => f.id == id);
 
       if(filter) {
-         if (!filter.selected) {
+         if (!filter.selected) {   //если в фильтре не объявлено свойство selected, то фильтр не был выбран изначально
             filter.selected = false;
          }
+
          filter.selected = !filter.selected;
+
          this.setState ({
             filters
          })
