@@ -15,7 +15,7 @@ export default class ProductPageItem extends React.Component{
       // }
 
       this.state = {
-          ...product
+         ...product
       }
    }
 
@@ -36,7 +36,7 @@ export default class ProductPageItem extends React.Component{
 
              <div className="row">
                 <div className="product-content-wrapper cell-7 cell-12-sm">
-                   <div className="product-introtext on-page editor">Планшет Samsung Galaxy Tab 3 Lite доступен по демократичной цене, особенно приятной для устройства данной марки. Это бюджетный вариант предыдущей, третьей, версии девайса, не уступающий ей в функциональности. Модель качественно собрана, оснащена семидюймовым дисплеем с разрешением 1024х600 пикселей и производительным двухъядерным процессором. Она предназначена для комфортного веб-серфинга, общения, развлечений и станет отличным выбором для активного пользователя</div>
+                   <div className="product-introtext on-page editor">{this.state.description}</div>
 
                    <form className="product-form" action="#">
                       <div className="option-selectors">
@@ -47,8 +47,7 @@ export default class ProductPageItem extends React.Component{
                                   {/*<option value="0" selected="selected">Черный</option>*/}
                                   {/*<option value="4">Белый</option>*/}
                                   { products.map((p, index) =>
-                                      <option value={p.item} key={index}>{p.item}</option>
-
+                                      <option value={p.color.item} key={index}>{p.color.item}</option>
                                   )}
                                </select>
                             </div>
@@ -65,7 +64,7 @@ export default class ProductPageItem extends React.Component{
                       </div>
 
                       <div className="product-control on-page">
-                         <div className="counter js-product-quantity" data-quantity="">
+                         <div className="counter js-product-quantity">
                             <button type="button" className="counter-button button count-down icon fa fa-minus">
                             </button>
 
@@ -95,7 +94,7 @@ export default class ProductPageItem extends React.Component{
                             </div>
                          </div>
 
-                         <button type="button" className="product-button product-quick-checkout button" >Оформить заказ</button>
+                         <button type="button" className="product-button product-quick-checkout button">Оформить заказ</button>
 
                          <div className="compare-control text-center-xs">
                             <a href="#" title="Добавить в сравнение" className="compare-link compare-add button is-transparent" >

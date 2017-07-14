@@ -1,69 +1,72 @@
 [
-  {
-    "id": "samsung-galaxy-tab-a-80",
-    "name": "SAMSUNG Galaxy Tab A 8.0",
-    "link": "/product/samsung-galaxy-tab-a-80",
-    "price": {
-      "prefix": "от",
-      "value": 12900,
-      "postfix": "руб."
-    },
-    "img": {
-      "src": "https://static-eu.insales.ru/images/products/1/6325/107133109/large_samsung_galaxy_tab.jpg",
-      "alt": "1",
-      "title": "2"
-    },
-    "color": [
-      {
-        "item": "Чёрный"
+   {
+      "id": "samsung-galaxy-tab-a-80",
+      "name": "SAMSUNG Galaxy Tab A 8.0",
+      "link": "/product/samsung-galaxy-tab-a-80",
+      "price": {
+         "prefix": "от",
+         "value": 12900,
+         "postfix": "руб."
       },
-      {
-        "item": "Белый"
-      }
-    ]
-  },
-  {
-    "id": "planshet-apple-ipad-mini-with-retina-display",
-    "name": "Планшет APPLE iPad mini with Retina display",
-    "link": "/product/planshet-apple-ipad-mini-with-retina-display",
-    "price": {
-      "value": 33985,
-      "postfix": "руб."
-    },
-    "img": {
-      "src": "https://static-eu.insales.ru/images/products/1/7130/102226906/%D0%91%D0%B5%D0%B7_%D0%BD%D0%B0%D0%B7%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F.jpg",
-      "alt": "1",
-      "title": "2"
-    },
-    "color": [
-      {
-        "item": "Чёрный"
+      "description": "Планшет Samsung Galaxy Tab 3 Lite доступен по демократичной цене, особенно приятной для устройства данной марки. Это бюджетный вариант предыдущей, третьей, версии девайса, не уступающий ей в функциональности. Модель качественно собрана, оснащена семидюймовым дисплеем с разрешением 1024х600 пикселей и производительным двухъядерным процессором. Она предназначена для комфортного веб-серфинга, общения, развлечений и станет отличным выбором для активного пользователя",
+      "img": {
+         "src": "https://static-eu.insales.ru/images/products/1/6325/107133109/large_samsung_galaxy_tab.jpg",
+         "alt": "1",
+         "title": "2"
       },
-      {
-        "item": "Белый"
-      }
-    ]
-  },
-  {
-    "id": "apple-ipad-air",
-    "name": "Apple iPad Air",
-    "link": "/product/apple-ipad-air",
-    "price": {
-      "value": 33500,
-      "postfix": "руб."
-    },
-    "img": {
-      "src": "https://static-eu.insales.ru/images/products/1/2865/101960497/large_Apple_iPad_Air.jpg",
-      "alt": "1",
-      "title": "2"
-    },
-    "color": [
-      {
-        "item": "Чёрный"
+      "color": [
+         {
+            "item": "Чёрный"
+         },
+         {
+            "item": "Белый"
+         }
+      ]
+   },
+   {
+      "id": "planshet-apple-ipad-mini-with-retina-display",
+      "name": "Планшет APPLE iPad mini with Retina display",
+      "link": "/product/planshet-apple-ipad-mini-with-retina-display",
+      "price": {
+         "value": 33985,
+         "postfix": "руб."
       },
-      {
-        "item": "Белый"
-      }
-    ]
-  }
+      "description": "Компактная, легкая и стильная модель, способная стать идеальным компаньоном современного человека. Этот мини-компьютер предоставляет в распоряжение пользователя широкий спектр развлечений, способов коммуникации, а также поможет в работе. Модель mini можно легко держать одной рукой и он помещается даже в маленькую сумку.",
+      "img": {
+         "src": "https://static-eu.insales.ru/images/products/1/7130/102226906/%D0%91%D0%B5%D0%B7_%D0%BD%D0%B0%D0%B7%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F.jpg",
+         "alt": "1",
+         "title": "2"
+      },
+      "color": [
+         {
+            "item": "Чёрный"
+         },
+         {
+            "item": "Белый"
+         }
+      ]
+   },
+   {
+      "id": "apple-ipad-air",
+      "name": "Apple iPad Air",
+      "link": "/product/apple-ipad-air",
+      "price": {
+         "value": 33500,
+         "postfix": "руб."
+      },
+      "description": "iPad mini 4 с великолепным 7,9-дюймовым дисплеем Retina весит всего 299 г, а его толщина составляет 6,1 мм — вы легко удержите его одной рукой.",
+      "img": {
+         "src": "https://static-eu.insales.ru/images/products/1/2865/101960497/large_Apple_iPad_Air.jpg",
+         "alt": "1",
+         "title": "2"
+      },
+      "color": [
+         {
+            "item": "Чёрный"
+         },
+         {
+            "item": "Белый"
+         }
+      ]
+   }
 ]
