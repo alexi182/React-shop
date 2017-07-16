@@ -1,9 +1,11 @@
 import * as constants from '../constansts/cart';
 
-function add(id) {
+function add(product, count) {
    return {
       type: constants.ADD,
-      payload: id
+      payload: {
+         product, count
+      }
    };
 }
 
@@ -14,25 +16,12 @@ function compare(id) {
    };
 }
 
-function order(id) {
+function makeOrder(order) {
    return {
       type: constants.ORDER,
-      payload: id
+      payload: order
    };
 }
 
-function increase(val) {
-   return {
-      type: constants.INCREASE,
-      payload: val
-   };
-}
 
-function decrease(val) {
-   return {
-      type: constants.DECREASE,
-      payload: val
-   };
-}
-
-export { add,compare,order,increase,decrease }
+export {add,compare,makeOrder}

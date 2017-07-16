@@ -1,22 +1,47 @@
 import BreadCrumbs from '../components/breadcrumbs';
+import {autobind} from 'core-decorators';
+import * as actions from '../actions/cart';
+import { connect } from 'react-redux';
+
 const products = require('../json/products.json');
 
+@connect (state => {})
+@autobind
 export default class ProductPageItem extends React.Component{
    constructor(props) {
       super(props);
       console.log(props);
 
-      let product = products.find(p => p.id == this.props.params.id);
+      this.product = products.find(p => p.id == this.props.params.id);
 
       // if(!product) {      //добвили в конце видео о выводе товара
       //    this.props.router.go('/notfound');
       //    return;
-
       // }
 
       this.state = {
-         ...product
+        count: 1
       }
+   }
+
+   add() { debugger;
+      let toDispatch = actions.add(this.product, this.state.count);
+      this.props.dispatch(toDispatch);
+   }
+
+   inc() {
+      this.setState({
+        count: this.state.count++
+      })
+   }
+
+   dec() {
+      if(this.state.count == 1)
+         return;
+
+      this.setState({
+         count: this.state.count--
+      })
    }
 
    render() {
@@ -28,7 +53,7 @@ export default class ProductPageItem extends React.Component{
                 <div className="decorated-title">
                    <div className="page-header-wrapper">
                       <h1 className="page-header">
-                         {this.state.name}
+                         {this.product.name}
                       </h1>
                    </div>
                 </div>
@@ -36,7 +61,7 @@ export default class ProductPageItem extends React.Component{
 
              <div className="row">
                 <div className="product-content-wrapper cell-7 cell-12-sm">
-                   <div className="product-introtext on-page editor">{this.state.description}</div>
+                   <div className="product-introtext on-page editor">{this.product.description}</div>
 
                    <form className="product-form" action="#">
                       <div className="option-selectors">
@@ -65,18 +90,18 @@ export default class ProductPageItem extends React.Component{
 
                       <div className="product-control on-page">
                          <div className="counter js-product-quantity">
-                            <button type="button" className="counter-button button count-down icon fa fa-minus">
+                            <button type="button" className="counter-button button count-down icon fa fa-minus" onClick={this.dec}>
                             </button>
 
-                            <input type="text" value="1" min="1" max="1000" name="quantity" className="counter-input input-number input-field" />
+                            <input type="text" value={ this.state.count } min="1" max="1000" name="quantity" className="counter-input input-number input-field" />
 
-                            <button type="button" data-quantity-change="1" className="counter-button button count-up icon fa fa-plus">
+                            <button type="button" className="counter-button button count-up icon fa fa-plus" onClick={this.inc}>
                             </button>
                          </div>
 
                          <div className="buy">
                             <div className="product-order-variant variant-shown js-variant-shown">
-                               <button className="product-button button is-primary" type="submit">
+                               <button className="product-button button is-primary" type="button" onClick={this.add}>
                                   <i className="icon buy-icon ion-ios-cart-outline"></i>
                                   <span className="button-text">В корзину</span>
                                </button>

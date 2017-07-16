@@ -4,6 +4,7 @@ const TabsContent = (props) => {
 
 };
 
+@autobind()
 export default class Tabs extends React.Component {
    render() {
       return (

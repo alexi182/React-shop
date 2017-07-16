@@ -1,4 +1,4 @@
-export default class Breadcrumbs extends React.Component {
+export default class BreadCrumbs extends React.Component {
    constructor(props) {
       super(props);
    }
