@@ -1,7 +1,7 @@
 import * as constants from '../constansts/cart';
 
 function countSum(cart) {
-   return cart.reduce((prev,cur) => prev += cur.count*cur.price.value ,0);
+   return cart.reduce((prev, cur) => prev + cur.count * cur.price.value, 0);
 }
 
 export default function cartReducers(state = { cart:[], sum:0 }, action) {
@@ -12,15 +12,15 @@ export default function cartReducers(state = { cart:[], sum:0 }, action) {
 
          let cart = state.cart.slice();
 
-         let cartItem = cart.find(p => p.product.id == action.payload.product.id );
+         let cartItem = cart.find(p => p.product.id == action.payload.product.id);
 
-         if ( cartItem ) {
+         if (cartItem) {
             cartItem.count += action.payload.count
          } else {
             cart.push(action.payload)
          }
 
-         let sum  = countSum(cart);
+          let sum  = countSum(cart);
 
          state = { ...state, cart, sum };
          break;

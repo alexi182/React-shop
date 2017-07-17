@@ -1,9 +1,11 @@
-import BreadCrumbs from '../components/breadcrumbs';
+import {autobind} from 'core-decorators';
+import * as actions from '../actions/cart';
 import { connect } from 'react-redux';
 
-@connect (state => {
+@connect (store => {
    return store.cart
 })
+@autobind()
 export default class Cart extends React.Component{
    constructor(props) {
       super(props);

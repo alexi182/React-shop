@@ -7,7 +7,7 @@ const products = require('../json/products.json');
 
 @connect (state => {})
 @autobind
-export default class ProductPageItem extends React.Component{
+export default class ProductPageItem extends React.Component {
    constructor(props) {
       super(props);
       console.log(props);
@@ -24,14 +24,14 @@ export default class ProductPageItem extends React.Component{
       }
    }
 
-   add() { debugger;
+   add() {
       let toDispatch = actions.add(this.product, this.state.count);
       this.props.dispatch(toDispatch);
    }
 
    inc() {
       this.setState({
-        count: this.state.count++
+        count: this.state.count +1
       })
    }
 
@@ -40,7 +40,7 @@ export default class ProductPageItem extends React.Component{
          return;
 
       this.setState({
-         count: this.state.count--
+         count: this.state.count -1
       })
    }
 
@@ -93,7 +93,7 @@ export default class ProductPageItem extends React.Component{
                             <button type="button" className="counter-button button count-down icon fa fa-minus" onClick={this.dec}>
                             </button>
 
-                            <input type="text" value={ this.state.count } min="1" max="1000" name="quantity" className="counter-input input-number input-field" />
+                            <input type="text" value={this.state.count} className="counter-input input-number input-field" />
 
                             <button type="button" className="counter-button button count-up icon fa fa-plus" onClick={this.inc}>
                             </button>
