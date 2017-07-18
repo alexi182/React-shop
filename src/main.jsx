@@ -8,6 +8,7 @@ import Payment from './pages/menu/payment';
 import Photos from './pages/catalog/photos';
 import ProductPage from './components/product-page';
 import ProductPageItem from './components/product-page-item';
+import Cart from './pages/cart';
 import NotFoundPage from './pages/notfound';
 import './vendors';
 
@@ -28,6 +29,7 @@ ReactDOM.render(
                 <Route path="photos" component={Photos} />
                 <Redirect from="*" to="/" />
              </Route>
+             <Route path="/cart" component={Cart} />
              <Route path="/payment" component={Payment} />
              <Route path="/product/:id" component={ProductPageItem} />
           </Route>

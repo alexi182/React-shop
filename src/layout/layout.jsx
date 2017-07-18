@@ -3,15 +3,15 @@ import Footer from '../components/footer';
 import Menu from '../components/menu/menu';
 import MenuContainer from '../components/menu/menu-container';
 import MenuItem from '../components/menu/menu-item';
+import {Link} from 'react-router';
 import {autobind} from 'core-decorators';
-import * as actions from '../actions/cart';
+// import * as actions from '../actions/cart';
 import { connect } from 'react-redux';
 
 const menu = require('../json/mainmenu.json');
 @connect( store => {
    return store.cart;
 })
-
 @autobind()
 export default class Layout extends React.Component {
    constructor(props) {
@@ -59,13 +59,13 @@ export default class Layout extends React.Component {
                          </a>
                       </div>
                       <div className="shopcart-widget cell-">
-                         <a href="#" title="Корзина" className="shopcart-link">
+                         <Link to="/cart" title="Корзина" className="shopcart-link">
                             <span className="shopcart-icon">
                                <i className="fa fa-shopping-cart"></i>
                             </span>
                             <span className="hide-sm">Корзина:</span>
                             <div className="widget-count">{/*{`${this.totalPrice}р.`}*/}12 112 р.</div>
-                         </a>
+                         </Link>
                       </div>
                    </div>
                 </div>

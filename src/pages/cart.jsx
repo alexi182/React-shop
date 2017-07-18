@@ -70,7 +70,7 @@ export default class Cart extends React.Component{
                             </div>
                          </div>
 
-                      </div><!-- /.cart-item -->
+                      </div>
                    </div>
                 </div>
 
