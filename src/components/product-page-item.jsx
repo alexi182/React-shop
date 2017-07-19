@@ -20,7 +20,7 @@ export default class ProductPageItem extends React.Component {
       // }
 
       this.state = {
-        count: 1
+         count: 1
       }
    }
 
@@ -31,7 +31,7 @@ export default class ProductPageItem extends React.Component {
 
    inc() {
       this.setState({
-        count: this.state.count +1
+         count: this.state.count +1
       })
    }
 
@@ -60,8 +60,21 @@ export default class ProductPageItem extends React.Component {
              </div>
 
              <div className="row">
+
+                <div className="product-gallery-wrapper cell-5 cell-12-sm">
+                   <div className="product-gallery">
+                      <div className="gallery-main-wrapper text-center hide-sm">
+                         <a href={this.product.img.src} id="gallery">
+                            <img src={this.product.img.src} />
+                         </a>
+                      </div>
+                   </div>
+                </div>
+
                 <div className="product-content-wrapper cell-7 cell-12-sm">
-                   <div className="product-introtext on-page editor">{this.product.description}</div>
+                   <div className="product-introtext on-page editor">
+                      {this.product.description}
+                   </div>
 
                    <form className="product-form" action="#">
                       <div className="option-selectors">
@@ -69,10 +82,8 @@ export default class ProductPageItem extends React.Component {
                             <div className="option option-cvet is-select">
                                <label className="option-label">Цвет</label>
                                <select className="option-values">
-                                  {/*<option value="0" selected="selected">Черный</option>*/}
-                                  {/*<option value="4">Белый</option>*/}
-                                  { products.map((p, index) =>
-                                      <option value={p.color.item} key={index}>{p.color.item}</option>
+                                  { this.product.color.map((p, index) =>
+                                      <option value={p.item} key={index}>{p.item}</option>
                                   )}
                                </select>
                             </div>
@@ -81,11 +92,11 @@ export default class ProductPageItem extends React.Component {
 
                       <div className="product-sku-wrapper js-product-sku-wrapper">
                          <span>Артикул:</span>
-                         <span className="js-product-sku">2710</span>
+                         <span className="js-product-sku">{this.product.art}</span>
                       </div>
 
                       <div className="product-prices on-page">
-                         <div className="price js-product-price on-page">12500.00&nbsp;руб</div>
+                         <div className="price js-product-price on-page">{this.product.price.value}&nbsp;руб.</div>
                       </div>
 
                       <div className="product-control on-page">

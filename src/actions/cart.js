@@ -23,5 +23,4 @@ function makeOrder(order) {
    };
 }
 
-
 export {add,compare,makeOrder}
