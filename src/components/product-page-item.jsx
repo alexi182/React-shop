@@ -14,11 +14,6 @@ export default class ProductPageItem extends React.Component {
 
       this.product = products.find(p => p.id == this.props.params.id);
 
-      // if(!product) {      //добвили в конце видео о выводе товара
-      //    this.props.router.go('/notfound');
-      //    return;
-      // }
-
       this.state = {
          count: 1
       }
