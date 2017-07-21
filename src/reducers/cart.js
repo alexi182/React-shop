@@ -1,14 +1,13 @@
 import * as constants from '../constansts/cart';
 
 function countSum(cart) {
-   return cart.reduce((prev, cur) => prev + cur.count * cur.price.value, 0);
+   return cart.reduce((prev, cur) => prev + cur.count * cur.product.price.value, 0);
 }
 
 export default function cartReducers(state = { cart:[], sum:0 }, action) {
 
    switch (action.type) {
-
-      case constants.ADD: { debugger;
+      case constants.ADD: {
 
          let cart = state.cart.slice();
 
@@ -21,6 +20,7 @@ export default function cartReducers(state = { cart:[], sum:0 }, action) {
          }
 
           let sum  = countSum(cart);
+         // console.log(sum);
 
          state = { ...state, cart, sum };
          break;

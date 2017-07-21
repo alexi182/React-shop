@@ -13,6 +13,7 @@ export default class Menu extends React.Component{
 }
 
 Menu.propTypes = {
+   menuType: PropTypes.string,
    level: PropTypes.number.isRequired
 };
 

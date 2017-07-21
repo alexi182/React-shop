@@ -2,7 +2,6 @@ import BreadCrumbs from '../components/breadcrumbs';
 import {autobind} from 'core-decorators';
 import * as actions from '../actions/cart';
 import { connect } from 'react-redux';
-
 const products = require('../json/products.json');
 
 @connect (state => {})

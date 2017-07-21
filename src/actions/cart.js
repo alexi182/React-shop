@@ -23,4 +23,11 @@ function makeOrder(order) {
    };
 }
 
-export {add,compare,makeOrder}
+function remove(id) {
+   return {
+      type: constants.REMOVE,
+      payload: id
+   };
+}
+
+export {add,compare,makeOrder,remove}

@@ -14,13 +14,10 @@ export default class Cart extends React.Component{
    render() {
       return (
           <div className="page-content">
-
              <div className="decorated-title-wrapper">
                 <div className="decorated-title">
                    <div className="page-header-wrapper">
-                      <h1 className="page-header">
-                         Корзина
-                      </h1>
+                      <h1 className="page-header">Корзина</h1>
                    </div>
                 </div>
              </div>
@@ -28,7 +25,7 @@ export default class Cart extends React.Component{
              <form action="/" method="post" className="shopping-cart">
                 <div className="cart-body row">
                    <div className="cart-list cell-12">
-                      <div className="cart-item" data-product-id="74140137" data-item-id="127355267">
+                      <div className="cart-item">
                          <div className="cart-item-inner row flex-middle">
                             <div className="item-image-wrapper cell-2 cell-4-sm">
                                <div className="item-image-inner">

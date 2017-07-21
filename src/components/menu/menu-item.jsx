@@ -22,7 +22,7 @@ export default class MenuItem extends React.Component{
 }
 
 MenuItem.propTypes = {
-   /*menuType: PropTypes.string.isRequired,*/
+   menuType: PropTypes.string,
    level: PropTypes.number.isRequired,
    href: PropTypes.string.isRequired,
    name: PropTypes.string.isRequired
