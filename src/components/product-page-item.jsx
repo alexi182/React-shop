@@ -4,7 +4,9 @@ import * as actions from '../actions/cart';
 import { connect } from 'react-redux';
 const products = require('../json/products.json');
 
-@connect (state => {})
+@connect (store => {
+   return {}
+})
 @autobind
 export default class ProductPageItem extends React.Component {
    constructor(props) {
@@ -14,7 +16,8 @@ export default class ProductPageItem extends React.Component {
       this.product = products.find(p => p.id == this.props.params.id);
 
       this.state = {
-         count: 1
+         count: 1,
+         color: 1
       }
    }
 
@@ -35,6 +38,18 @@ export default class ProductPageItem extends React.Component {
 
       this.setState({
          count: this.state.count -1
+      })
+   }
+
+   handleChange(e) {
+      this.setState({
+         color: e.target.value
+      })
+   }
+
+   setCount(e) {
+      this.setState({
+         count: +e.target.value
       })
    }
 
@@ -75,9 +90,9 @@ export default class ProductPageItem extends React.Component {
                          <div className="option-selector">
                             <div className="option option-cvet is-select">
                                <label className="option-label">Цвет</label>
-                               <select className="option-values">
+                               <select value={this.props.color} onChange={this.handleChange} className="option-values">
                                   { this.product.color.map((p, index) =>
-                                      <option value={p.item} key={index}>{p.item}</option>
+                                      <option value={p.id} key={index}>{p.name}</option>
                                   )}
                                </select>
                             </div>
@@ -98,7 +113,7 @@ export default class ProductPageItem extends React.Component {
                             <button type="button" className="counter-button button count-down icon fa fa-minus" onClick={this.dec}>
                             </button>
 
-                            <input type="text" value={this.state.count} className="counter-input input-number input-field" />
+                            <input type="text" value={this.state.count} className="counter-input input-number input-field" onChange={this.setCount} />
 
                             <button type="button" className="counter-button button count-up icon fa fa-plus" onClick={this.inc}>
                             </button>
