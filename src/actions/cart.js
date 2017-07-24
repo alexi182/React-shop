@@ -30,4 +30,18 @@ function remove(id) {
    };
 }
 
-export {add,compare,makeOrder,remove}
+function inc(id) {
+   return {
+      type: constants.INC,
+      payload: id
+   };
+}
+
+function dec(id) {
+   return {
+      type: constants.DEC,
+      payload: id
+   };
+}
+
+export {add,compare,makeOrder,remove,inc,dec}

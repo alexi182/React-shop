@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 
 const menu = require('../json/mainmenu.json');
 @connect( store => {
-   return store.cart;
+   return {sum: store.cart.sum};
 })
 @autobind()
 export default class Layout extends React.Component {
@@ -64,7 +64,7 @@ export default class Layout extends React.Component {
                                <i className="fa fa-shopping-cart"></i>
                             </span>
                             <span className="hide-sm">Корзина:</span>
-                            <div className="widget-count">{`${this.totalPrice}р.`}</div>
+                            <div className="widget-count">{`${this.props.sum||0}р.`}</div>
                          </Link>
                       </div>
                    </div>
