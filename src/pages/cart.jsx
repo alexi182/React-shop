@@ -21,12 +21,12 @@ export default class Cart extends React.Component{
       this.props.dispatch(toDispatch);
    };
 
-   inc=(id) => () =>  {
+   inc=(id) => () => {
       let toDispatch = actions.inc(id);
       this.props.dispatch(toDispatch);
    };
 
-   dec=(id) => () =>  {
+   dec=(id) => () => {
       let toDispatch = actions.dec(id);
       this.props.dispatch(toDispatch);
    };

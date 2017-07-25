@@ -53,6 +53,10 @@ export default class ProductPageItem extends React.Component {
       })
    }
 
+   tabs() {
+
+   }
+
    render() {
       return (
           <div className="page-content">
@@ -153,7 +157,55 @@ export default class ProductPageItem extends React.Component {
                          </div>
                       </div>
                    </form>
+
                 </div>
+
+                <div className="cell-12">
+                   <div className="product-content">
+                      <div className="tabs-menu-wrapper">
+                         <ul className="tabs-menu product-tabs-list">
+                            <li className="tabs-menu-item is-active" onClick={this.tabs}>
+                               <a href="#" className="tabs-menu-link">Описание</a>
+                            </li>
+                            <li className="tabs-menu-item is-closed" onClick={this.tabs}>
+                               <a href="#product-characteristics" className="tabs-menu-link">Характеристики</a>
+                            </li>
+                         </ul>
+                      </div>
+                      <div className="tabs-list product-tabs-list">
+
+                         <div id="product-description" className="tab-block is-active">
+                            <div className="editor">
+                               <p>{this.product.name}</p>
+                               <p>{this.product.description}
+                                  <br/><br/>
+                               </p>
+                            </div>
+                         </div>
+
+                         <div id="product-characteristics" className="tab-block is-closed">
+                            <div className="editor">
+                               <table className="table table-bordered table-striped table-hover">
+                                  <tr>
+                                     <td>Диагональ</td>
+                                     <td>8</td>
+                                  </tr>
+                                  <tr>
+                                     <td>Wi-Fi соединение</td>
+                                     <td>да</td>
+                                  </tr>
+                                  <tr>
+                                     <td>Объем оперативной памяти, Гб</td>
+                                     <td>16</td>
+                                  </tr>
+                               </table>
+                            </div>
+                         </div>
+
+                      </div>
+                   </div>
+                </div>
+
              </div>
           </div>
       )

@@ -26,7 +26,7 @@ export default class ComparePage extends React.Component {
              <div className="compares id=js-compare-wrapper">
                 <div id="js-compare-inner">
                    <div className="compare-toolbar">
-                      <button className="button is-primary button-same-toggle js-same-toggle" type=button><span className="link-text show">Скрыть одинаковые <i className="fa fa-eye-slash"></i> </span>
+                      <button className="button is-primary button-same-toggle js-same-toggle" type="button"><span className="link-text show">Скрыть одинаковые <i className="fa fa-eye-slash"></i> </span>
                          <span className="link-text hide">Показать одинаковые <i className="fa fa-eye"></i></span></button>
                    </div>
                    <div className="compare-table-wrapper">

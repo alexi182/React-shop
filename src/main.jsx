@@ -9,6 +9,7 @@ import Photos from './pages/catalog/photos';
 import ProductPage from './components/product-page';
 import ProductPageItem from './components/product-page-item';
 import Cart from './pages/cart';
+import Compare from './pages/compare';
 import NotFoundPage from './pages/notfound';
 import './vendors';
 
@@ -30,6 +31,7 @@ ReactDOM.render(
                 <Redirect from="*" to="/" />
              </Route>
              <Route path="/cart" component={Cart} />
+             <Route path="/compare" component={Compare} />
              <Route path="/payment" component={Payment} />
              <Route path="/product/:id" component={ProductPageItem} />
           </Route>
