@@ -17,7 +17,9 @@ export default class ProductPageItem extends React.Component {
 
       this.state = {
          count: 1,
-         color: 1
+         color: 1,
+         active: true,
+         disActive: false
       }
    }
 
@@ -53,11 +55,20 @@ export default class ProductPageItem extends React.Component {
       })
    }
 
-   tabs() {
-
+   clickTab() {
+      this.setState({
+         active: !this.state.active,
+         disActive: !this.state.disActive
+      })
    }
 
    render() {
+      let filterActiveClass = this.state.active ? "is-active" : "is-closed";
+
+      let filterDisActiveClass = this.state.disActive ? "is-closed" : "is-active";
+
+      let filterContent = this.state.active ? "is-active" : "is-closed";
+
       return (
           <div className="page-content">
              <BreadCrumbs />
@@ -164,17 +175,17 @@ export default class ProductPageItem extends React.Component {
                    <div className="product-content">
                       <div className="tabs-menu-wrapper">
                          <ul className="tabs-menu product-tabs-list">
-                            <li className="tabs-menu-item is-active" onClick={this.tabs}>
+                            <li className={`tabs-menu-item ${filterActiveClass}`} onClick={this.clickTab}>
                                <a href="#" className="tabs-menu-link">Описание</a>
                             </li>
-                            <li className="tabs-menu-item is-closed" onClick={this.tabs}>
+                            <li className={`tabs-menu-item ${filterDisActiveClass}`} onClick={this.clickTab}>
                                <a href="#product-characteristics" className="tabs-menu-link">Характеристики</a>
                             </li>
                          </ul>
                       </div>
-                      <div className="tabs-list product-tabs-list">
 
-                         <div id="product-description" className="tab-block is-active">
+                      <div className="tabs-list product-tabs-list">
+                         <div id="product-description" className={`tab-block ${filterContent}`}> {/*is-active*/}
                             <div className="editor">
                                <p>{this.product.name}</p>
                                <p>{this.product.description}
@@ -183,7 +194,7 @@ export default class ProductPageItem extends React.Component {
                             </div>
                          </div>
 
-                         <div id="product-characteristics" className="tab-block is-closed">
+                         <div id="product-characteristics" className={`tab-block ${filterContent}`}> {/*is-closed*/}
                             <div className="editor">
                                <table className="table table-bordered table-striped table-hover">
                                   <tr>

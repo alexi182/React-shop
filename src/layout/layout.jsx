@@ -5,23 +5,17 @@ import MenuContainer from '../components/menu/menu-container';
 import MenuItem from '../components/menu/menu-item';
 import {Link} from 'react-router';
 import {autobind} from 'core-decorators';
-// import * as actions from '../actions/cart';
 import { connect } from 'react-redux';
 
 const menu = require('../json/mainmenu.json');
 @connect( store => {
-   return {sum: store.cart.sum};
+   return store.cart;
 })
 @autobind()
 export default class Layout extends React.Component {
    constructor(props) {
       super(props);
    }
-
-   // get totalPrice() {
-   //    return
-   // }
-
    render() {
       return (
           <div className="page">
@@ -52,19 +46,16 @@ export default class Layout extends React.Component {
 
                       <div className="compares-widget cell- ">
                          <a href="#" className="compares-widget-link">
-                             <span className="shopcart-icon fa fa-bar-chart">
-                             </span>
-                            <span className="hide-sm">Сравнение:</span>
-                            <div className="widget-count">{/*{this.totalPrice}*/}2</div>
+                             <div className="shopcart-icon fa fa-bar-chart"></div>
+                             <span className="hide-sm">Сравнение:</span>
+                             <div className="widget-count">{this.props.cart.count||0}</div>
                          </a>
                       </div>
                       <div className="shopcart-widget cell-">
                          <Link to="/cart" title="Корзина" className="shopcart-link">
-                            <span className="shopcart-icon">
-                               <i className="fa fa-shopping-cart"></i>
-                            </span>
+                            <div className="shopcart-icon fa fa-shopping-cart"></div>
                             <span className="hide-sm">Корзина:</span>
-                            <div className="widget-count">{`${this.props.sum||0}р.`}</div>
+                            <div className="widget-count">{`${this.props.sum||0} р.`}</div>
                          </Link>
                       </div>
                    </div>
@@ -96,6 +87,7 @@ export default class Layout extends React.Component {
              </div>
 
              <Footer />
+
           </div>
       );
    }
