@@ -9,13 +9,6 @@ function add(product, count) {
    };
 }
 
-function compare(id) {
-   return {
-      type: constants.COMPARE,
-      payload: id
-   };
-}
-
 function makeOrder(order) {
    return {
       type: constants.ORDER,
@@ -44,4 +37,4 @@ function dec(id) {
    };
 }
 
-export {add,compare,makeOrder,remove,inc,dec}
+export {add,makeOrder,remove,inc,dec}

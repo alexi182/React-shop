@@ -36,7 +36,7 @@ export default function cartReducers(state = { cart:[], sum:0 }, action) {
 
          let sum  = countSum(cart);
 
-         state = {...state, cart,sum};
+         state = {...state, cart, sum};
          break;
       }
 

@@ -19,7 +19,7 @@ export default class ProductPageItem extends React.Component {
          count: 1,
          color: 1,
          active: true,
-         disActive: false
+         index: 0
       }
    }
 
@@ -55,17 +55,18 @@ export default class ProductPageItem extends React.Component {
       })
    }
 
-   clickTab() {
+   clickTab(index, e) {
+      e.preventDefault();
+
       this.setState({
-         active: !this.state.active,
-         disActive: !this.state.disActive
+         active: this.state.active,
       })
    }
 
    render() {
       let filterActiveClass = this.state.active ? "is-active" : "is-closed";
 
-      let filterDisActiveClass = this.state.disActive ? "is-closed" : "is-active";
+      let filterDisActiveClass = !this.state.active ? "is-closed" : "is-active";
 
       let filterContent = this.state.active ? "is-active" : "is-closed";
 
@@ -100,75 +101,74 @@ export default class ProductPageItem extends React.Component {
                       {this.product.description}
                    </div>
 
-                   <form className="product-form" action="#">
-                      <div className="option-selectors">
-                         <div className="option-selector">
-                            <div className="option option-cvet is-select">
-                               <label className="option-label">Цвет</label>
-                               <select value={this.props.color} onChange={this.handleChange} className="option-values">
-                                  { this.product.color.map((p, index) =>
-                                      <option value={p.id} key={index}>{p.name}</option>
-                                  )}
-                               </select>
-                            </div>
-                         </div>
-                      </div>
+                   {(this.product.id) ?
+                       <form className="product-form" action="#">
+                          <div className="option-selectors">
+                             <div className="option-selector">
+                                <div className="option option-cvet is-select">
+                                   <label className="option-label">Цвет</label>
+                                   <select value={this.props.color} onChange={this.handleChange} className="option-values">
+                                      {this.product.color.map((p, index) =>
+                                          <option value={p.id} key={index}>{p.name}</option>
+                                      )}
+                                   </select>
+                                </div>
+                             </div>
+                          </div>
 
-                      <div className="product-sku-wrapper js-product-sku-wrapper">
-                         <span>Артикул:</span>
-                         <span className="js-product-sku">{this.product.art}</span>
-                      </div>
+                          <div className="product-sku-wrapper js-product-sku-wrapper">
+                             <span>Артикул:</span>
+                             <span className="js-product-sku">{this.product.art}</span>
+                          </div>
 
-                      <div className="product-prices on-page">
-                         <div className="price js-product-price on-page">{this.product.price.value}&nbsp;руб.</div>
-                      </div>
+                          <div className="product-prices on-page">
+                             <div className="price js-product-price on-page">{this.product.price.value} руб.</div>
+                          </div>
 
-                      <div className="product-control on-page">
-                         <div className="counter js-product-quantity">
-                            <button type="button" className="counter-button button count-down icon fa fa-minus" onClick={this.dec}>
-                            </button>
+                          <div className="product-control on-page">
+                             <div className="counter js-product-quantity">
+                                <button type="button" className="counter-button button count-down icon fa fa-minus" onClick={this.dec}>
+                                </button>
 
-                            <input type="text" value={this.state.count} className="counter-input input-number input-field" onChange={this.setCount} />
+                                <input type="text" value={this.state.count} className="counter-input input-number input-field" onChange={this.setCount} />
 
-                            <button type="button" className="counter-button button count-up icon fa fa-plus" onClick={this.inc}>
-                            </button>
-                         </div>
+                                <button type="button" className="counter-button button count-up icon fa fa-plus" onClick={this.inc}>
+                                </button>
+                             </div>
 
-                         <div className="buy">
-                            <div className="product-order-variant variant-shown js-variant-shown">
-                               <button className="product-button button is-primary" type="button" onClick={this.add}>
-                                  <i className="icon buy-icon ion-ios-cart-outline"></i>
-                                  <span className="button-text">В корзину</span>
-                               </button>
-                            </div>
+                             <div className="buy">
+                                <div className="product-order-variant variant-shown js-variant-shown">
+                                   <button className="product-button button is-primary" type="button" onClick={this.add}>
+                                      <i className="icon buy-icon ion-ios-cart-outline"></i>
+                                      <span className="button-text">В корзину</span>
+                                   </button>
+                                </div>
 
-                            <div className="product-order-variant variant-hidden js-variant-hidden hide">
-                               <p className="notice notice-info">Товар отсутствует</p>
-                            </div>
+                                <div className="product-order-variant variant-preorder js-variant-preorder hide">
+                                   <button className="product-button button" type="button">
+                                      <i className="icon feedback-icon"></i>
+                                      <span className="button-text">Предзаказ</span>
+                                   </button>
+                                </div>
+                             </div>
 
-                            <div className="product-order-variant variant-preorder js-variant-preorder hide">
-                               <button className="product-button button" type="button">
-                                  <i className="icon feedback-icon"></i>
-                                  <span className="button-text">Предзаказ</span>
-                               </button>
-                            </div>
-                         </div>
+                             <button type="button" className="product-button product-quick-checkout button">Оформить заказ</button>
 
-                         <button type="button" className="product-button product-quick-checkout button">Оформить заказ</button>
-
-                         <div className="compare-control text-center-xs">
-                            <a href="#" title="Добавить в сравнение" className="compare-link compare-add button is-transparent" >
-                               <i className="compare-icon fa fa-bar-chart"></i>
-                               <span className="link-text">Добавить в сравнение</span>
-                            </a>
-                            <a href="#" title="Удалить из сравнения" className="compare-link compare-delete button is-transparent hide">
-                               <i className="compare-icon fa fa-check"></i>
-                               <span className="link-text">Удалить из сравнения</span>
-                            </a>
-                         </div>
-                      </div>
-                   </form>
-
+                             <div className="compare-control text-center-xs">
+                                <a href="#" title="Добавить в сравнение" className="compare-link compare-add button is-transparent" >
+                                   <i className="compare-icon fa fa-bar-chart"></i>
+                                   <span className="link-text">Добавить в сравнение</span>
+                                </a>
+                                <a href="#" title="Удалить из сравнения" className="compare-link compare-delete button is-transparent hide">
+                                   <i className="compare-icon fa fa-check"></i>
+                                   <span className="link-text">Удалить из сравнения</span>
+                                </a>
+                             </div>
+                          </div>
+                       </form> :
+                       <div className="product-order-variant variant-hidden js-variant-hidden">
+                          <p className="notice notice-info">Товар отсутствует</p>
+                       </div> }
                 </div>
 
                 <div className="cell-12">
@@ -197,26 +197,18 @@ export default class ProductPageItem extends React.Component {
                          <div id="product-characteristics" className={`tab-block ${filterContent}`}> {/*is-closed*/}
                             <div className="editor">
                                <table className="table table-bordered table-striped table-hover">
-                                  <tr>
-                                     <td>Диагональ</td>
-                                     <td>8</td>
-                                  </tr>
-                                  <tr>
-                                     <td>Wi-Fi соединение</td>
-                                     <td>да</td>
-                                  </tr>
-                                  <tr>
-                                     <td>Объем оперативной памяти, Гб</td>
-                                     <td>16</td>
-                                  </tr>
+                                  {this.product.features.map((p, index) =>
+                                      <tr key={index}>
+                                         <td>{p.item}</td>
+                                         <td>{p.name}</td>
+                                      </tr>
+                                  )}
                                </table>
                             </div>
                          </div>
-
                       </div>
                    </div>
                 </div>
-
              </div>
           </div>
       )

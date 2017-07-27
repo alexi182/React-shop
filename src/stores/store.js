@@ -3,11 +3,13 @@ import logger from 'redux-logger';
 import promise from 'redux-promise-middleware';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import cartReducers from '../reducers/cart';
+import compareReducers from '../reducers/compare';
 
 const middleWare = applyMiddleware(promise(), thunk, logger);
 
 const reducer = combineReducers({
-   cart: cartReducers
+   cart: cartReducers,
+   compare: compareReducers
 });
 
 const store = createStore(reducer, middleWare);
