@@ -5,13 +5,24 @@ export default function compareReducers(state ={ compare:[] }, action ) {
       case constants.COMPARE: {
 
          let compare = state.compare.slice();
-         let compareItem = compare.find(p => p.product.id == action.payload.product.id);
+         let compareItem = compare.find(p => p.id == action.payload.id);
 
-         if(compareItem && compareItem.count >= 4) {
+         if(compareItem && compare.length >= 4) {
             return
          } else {
-            compareItem.push(action.payload);
-            compareItem.count += action.payload.count
+            compare.push(action.payload);
+            state = {...state, compare}
+         }
+         break;
+      }
+      case constants.DELETE: {
+
+         let compare = state.compare.slice();
+
+         let compareIndex = compare.findIndex(p => p.id == action.payload);
+         if(compareIndex !== -1) {
+            compare.splice(compareIndex, 1);
+            state = {...state, compare}
          }
       }
    }

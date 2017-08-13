@@ -44,7 +44,7 @@ export default class ProductPage extends React.Component{
 
                 <div className="products-list row">
                    {products.map((product, index) =>
-                     <ProductItem {...product} key={index} />
+                       <ProductItem {...product} key={index} />
                    )}
                 </div>
 

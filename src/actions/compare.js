@@ -1,12 +1,17 @@
 import * as constants from '../constansts/compare';
 
-function compare(product, count) {
+function compare(product) {
    return {
       type: constants.COMPARE,
-      payload: {
-         product,count
-      }
+      payload: product
    }
 }
 
-export {compare}
+function remove(id) {
+   return {
+      type: constants.DELETE,
+      payload: id
+   }
+}
+
+export {compare, remove}

@@ -1,3 +1,4 @@
 const COMPARE = 'COMPARE_ADD';
+const DELETE = 'COMPARE_DELETE';
 
-export { COMPARE };
+export { COMPARE,DELETE };
