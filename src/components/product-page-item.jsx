@@ -1,11 +1,15 @@
 import BreadCrumbs from '../components/breadcrumbs';
 import {autobind} from 'core-decorators';
-import * as actions from '../actions/cart';
+import * as compareActions from '../actions/compare';
+import * as cartActions from '../actions/cart';
 import { connect } from 'react-redux';
-const products = require('../json/products.json');
+import * as productActions from '../actions/product';
 
 @connect (store => {
-   return {}
+   return {
+      compare: store.compare,
+      product: store.product,
+   }
 })
 @autobind
 export default class ProductPageItem extends React.Component {
@@ -13,18 +17,18 @@ export default class ProductPageItem extends React.Component {
       super(props);
       console.log(props);
 
-      this.product = products.find(p => p.id == this.props.params.id);
+       // this.product = products.find(p => p.id == this.props.params.id);
+      productActions.findProduct(this.props.params.id);
 
       this.state = {
          count: 1,
          color: 1,
          active: true,
-         index: 0
       }
    }
 
    add() {
-      let toDispatch = actions.add(this.product, this.state.count);
+      let toDispatch = cartActions.add(this.props.product.product, this.state.count);
       this.props.dispatch(toDispatch);
    }
 
@@ -41,6 +45,17 @@ export default class ProductPageItem extends React.Component {
       this.setState({
          count: this.state.count -1
       })
+   }
+
+   compare(e) {
+      e.preventDefault();
+      let toDispatch = compareActions.compare(this.product);
+      this.props.dispatch(toDispatch);
+   }
+
+   remove(e) {
+      e.preventDefault();
+
    }
 
    handleChange(e) {
@@ -63,12 +78,23 @@ export default class ProductPageItem extends React.Component {
       })
    }
 
+
    render() {
+      if (this.props.product.isFinding){
+         return (
+             <div>
+                Product is finding
+             </div>
+         )
+      }
       let filterActiveClass = this.state.active ? "is-active" : "is-closed";
 
       let filterDisActiveClass = !this.state.active ? "is-closed" : "is-active";
 
       let filterContent = this.state.active ? "is-active" : "is-closed";
+
+      let isInCompare = !!this.props.compare.find(p =>
+      p.id == this.props.product.id);
 
       return (
           <div className="page-content">
@@ -78,7 +104,7 @@ export default class ProductPageItem extends React.Component {
                 <div className="decorated-title">
                    <div className="page-header-wrapper">
                       <h1 className="page-header">
-                         {this.product.name}
+                         {this.props.product.name}
                       </h1>
                    </div>
                 </div>
@@ -89,8 +115,8 @@ export default class ProductPageItem extends React.Component {
                 <div className="product-gallery-wrapper cell-5 cell-12-sm">
                    <div className="product-gallery">
                       <div className="gallery-main-wrapper text-center hide-sm">
-                         <a href={this.product.img.src} id="gallery">
-                            <img src={this.product.img.src} />
+                         <a href={this.props.product.img.src} id="gallery">
+                            <img src={this.props.product.img.src} />
                          </a>
                       </div>
                    </div>
@@ -155,14 +181,15 @@ export default class ProductPageItem extends React.Component {
                              <button type="button" className="product-button product-quick-checkout button">Оформить заказ</button>
 
                              <div className="compare-control text-center-xs">
-                                <a href="#" title="Добавить в сравнение" className="compare-link compare-add button is-transparent" >
-                                   <i className="compare-icon fa fa-bar-chart"></i>
-                                   <span className="link-text">Добавить в сравнение</span>
-                                </a>
-                                <a href="#" title="Удалить из сравнения" className="compare-link compare-delete button is-transparent hide">
-                                   <i className="compare-icon fa fa-check"></i>
-                                   <span className="link-text">Удалить из сравнения</span>
-                                </a>
+                                {(isInCompare) ?
+                                    <a href="#" title="Удалить из сравнения" className="compare-link compare-delete button is-transparent">
+                                       <i className="compare-icon fa fa-check"></i>
+                                       <span className="link-text" onClick={this.remove}>Удалить из сравнения</span>
+                                    </a>:
+                                    <a href="#" title="Добавить в сравнение" className="compare-link compare-add button is-transparent" onClick={this.compare}>
+                                       <i className="compare-icon fa fa-bar-chart"></i>
+                                       <span className="link-text">Добавить в сравнение</span>
+                                    </a>}
                              </div>
                           </div>
                        </form> :
