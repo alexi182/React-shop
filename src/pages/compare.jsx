@@ -1,10 +1,10 @@
 import {Link} from 'react-router';
 import {autobind} from 'core-decorators';
-import * as actions from '../actions/cart';
+import * as actions from '../actions/compare';
 import { connect } from 'react-redux';
 
 @connect (store => {
-   return store.cart
+   return store.compare
 })
 @autobind()
 export default class ComparePage extends React.Component {

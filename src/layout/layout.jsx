@@ -9,8 +9,9 @@ import { connect } from 'react-redux';
 
 const menu = require('../json/mainmenu.json');
 @connect( store => {
-   return store.cart;
+   return store.compare
 })
+
 @autobind()
 export default class Layout extends React.Component {
    constructor(props) {
@@ -45,11 +46,11 @@ export default class Layout extends React.Component {
                       </div>
 
                       <div className="compares-widget cell- ">
-                         <a href="#" className="compares-widget-link">
+                         <Link to="/compare" className="compares-widget-link">
                              <div className="shopcart-icon fa fa-bar-chart"></div>
                              <span className="hide-sm">Сравнение:</span>
-                             <div className="widget-count">{this.props.cart.count||0}</div>
-                         </a>
+                             <div className="widget-count">{this.props.count||0}</div>
+                         </Link>
                       </div>
                       <div className="shopcart-widget cell-">
                          <Link to="/cart" title="Корзина" className="shopcart-link">
