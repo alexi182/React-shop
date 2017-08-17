@@ -23,7 +23,7 @@ app.use(function (req, res, next) { //middleware для настроки CORS з
    res.header("Access-Control-Allow-Headers", "X-Requested-With");
 
    next();
-});
+}) ;
 
 app.use(express.static(__dirname + '/public'));
 app.use(logger('combined'));
