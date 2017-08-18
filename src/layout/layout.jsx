@@ -21,8 +21,8 @@ export default class Layout extends React.Component {
 
       this.productService = new ProductService();
       this.productService.getAllProducts().then((response) => {
-         console.log(response.name)
-      })
+         console.log(response)
+      });
 
       this.productService = new Features();
       this.productService.getAllFeatures().then((response) => {

@@ -46,4 +46,4 @@ var deviceSchema = new mongoose.Schema({
    },
 });
 
-mongoose.model('Device', deviceSchema, 'devices');
+mongoose.model('Device', deviceSchema, 'device');
