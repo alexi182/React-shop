@@ -49,7 +49,7 @@ export default class ProductPageItem extends React.Component {
 
    compare(e) {
       e.preventDefault();
-      let toDispatch = compareActions.compare(this.product);
+      let toDispatch = compareActions.compare(this.props.product);
       this.props.dispatch(toDispatch);
    }
 
@@ -93,8 +93,8 @@ export default class ProductPageItem extends React.Component {
 
       let filterContent = this.state.active ? "is-active" : "is-closed";
 
-      let isInCompare = !!this.props.compare.find(p =>
-      p.id == this.props.product.id);
+      // let isInCompare =  !!this.props.compare.find(p =>
+      // p.id == this.props.product.id);
 
       return (
           <div className="page-content">
@@ -124,17 +124,17 @@ export default class ProductPageItem extends React.Component {
 
                 <div className="product-content-wrapper cell-7 cell-12-sm">
                    <div className="product-introtext on-page editor">
-                      {this.product.description}
+                      {this.props.product.description}
                    </div>
 
-                   {(this.product.id) ?
+                   {(this.props.product.id) ?
                        <form className="product-form" action="#">
                           <div className="option-selectors">
                              <div className="option-selector">
                                 <div className="option option-cvet is-select">
                                    <label className="option-label">Цвет</label>
                                    <select value={this.props.color} onChange={this.handleChange} className="option-values">
-                                      {this.product.color.map((p, index) =>
+                                      {this.props.product.color.map((p, index) =>
                                           <option value={p.id} key={index}>{p.name}</option>
                                       )}
                                    </select>
@@ -144,11 +144,11 @@ export default class ProductPageItem extends React.Component {
 
                           <div className="product-sku-wrapper js-product-sku-wrapper">
                              <span>Артикул:</span>
-                             <span className="js-product-sku">{this.product.art}</span>
+                             <span className="js-product-sku">{this.props.product.articul}</span>
                           </div>
 
                           <div className="product-prices on-page">
-                             <div className="price js-product-price on-page">{this.product.price.value} руб.</div>
+                             <div className="price js-product-price on-page">{this.props.product.price.value} руб.</div>
                           </div>
 
                           <div className="product-control on-page">
@@ -214,7 +214,7 @@ export default class ProductPageItem extends React.Component {
                       <div className="tabs-list product-tabs-list">
                          <div id="product-description" className={`tab-block ${filterContent}`}> {/*is-active*/}
                             <div className="editor">
-                               <p>{this.product.name}</p>
+                               <p>{this.props.product.name}</p>
                                <p>{this.product.description}
                                   <br/><br/>
                                </p>

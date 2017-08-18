@@ -5,13 +5,16 @@ var deviceSchema = new mongoose.Schema({
       type: String,
       required: true
    },
-   featuresId: {
+   featuresID: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'features'
    },
    id: {
       type: String,
       required: true
+   },
+   link: {
+      type: String,
    },
    articul: {
       type: Number,
