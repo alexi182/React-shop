@@ -1,8 +1,20 @@
+import * as productActions from '../actions/product';
 import SideBar from '../components/sidebar';
 import ProductItem from './productitem';
-const products = require('../json/products.json');
+// const products = require('../json/products.json');
+
+@connect (store => {
+   return {
+      product: store.product,
+   }
+})
 
 export default class ProductPage extends React.Component{
+   constructor(props){
+      super(props);
+
+      productActions.findProduct(this.props.params.id);
+   }
    render() {
       return (
           <div className="row">
@@ -43,8 +55,8 @@ export default class ProductPage extends React.Component{
                 </div>
 
                 <div className="products-list row">
-                   {products.map((product, index) =>
-                       <ProductItem {...product} key={index} />
+                   {this.props.product.map((p, index) =>
+                       <ProductItem {...p} key={index} />
                    )}
                 </div>
 

@@ -4,11 +4,11 @@ var mongoose = require('mongoose');
 var Devices = mongoose.model('Device');
 
 router.get('/', function (request, response, next) {
-   Devices.find({}, function (err, devices) {
+   Devices.find({}, function (err, device) {
       if (err) {
          return next(err);
       }
-      response.json(devices);
+      response.json(device);
    });
 });
 
