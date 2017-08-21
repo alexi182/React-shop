@@ -1,10 +1,28 @@
-import * as constants from '../constansts/product';
+import ProductService from '../backend/products';
+import * as productConstants from '../constansts/product';
+import * as featureConstants from '../constansts/feature';
+const productService = new ProductService();
 
 function findProduct(id) {
    return {
-      type: constants.FIND,
-      payload: productService.find(id)
+      type: productConstants.FIND,
+      payload: productService.findProduct(id)
+
    }
 }
 
-export {findProduct}
+function findProductFeature(id) {
+   return {
+      type: featureConstants.FIND,
+      payload: productService.findProductFeature(id)
+   }
+}
+
+function getProducts() {
+   return {
+      type: productConstants.GET,
+      payload: productService.getAllProducts()
+   }
+}
+
+export {findProduct, findProductFeature, getProducts}

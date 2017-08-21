@@ -5,16 +5,9 @@ var deviceSchema = new mongoose.Schema({
       type: String,
       required: true
    },
-   featuresID: {
+   featuresId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'features'
-   },
-   id: {
-      type: String,
-      required: true
-   },
-   link: {
-      type: String,
    },
    articul: {
       type: Number,
@@ -29,7 +22,7 @@ var deviceSchema = new mongoose.Schema({
       required: true
    },
    fullDescription: {
-      type: String,
+      type: String
    },
    img: {
       src: String,
@@ -46,4 +39,4 @@ var deviceSchema = new mongoose.Schema({
    },
 });
 
-mongoose.model('Device', deviceSchema, 'device');
+mongoose.model('Device', deviceSchema, 'devices');

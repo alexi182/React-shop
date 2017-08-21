@@ -6,10 +6,8 @@ import MenuItem from '../components/menu/menu-item';
 import {Link} from 'react-router';
 import {autobind} from 'core-decorators';
 import { connect } from 'react-redux';
-import ProductService from '../backend/products';
-import Features from '../backend/features';
-
 const menu = require('../json/mainmenu.json');
+
 @connect( store => {
    let {cart, compare} = store;
    return {cart, compare:compare.compare};
@@ -18,16 +16,6 @@ const menu = require('../json/mainmenu.json');
 export default class Layout extends React.Component {
    constructor(props) {
       super(props);
-
-      this.productService = new ProductService();
-      this.productService.getAllProducts().then((response) => {
-         console.log(response)
-      });
-
-      this.productService = new Features();
-      this.productService.getAllFeatures().then((response) => {
-         console.log(response)
-      });
    }
    render() {
       return (

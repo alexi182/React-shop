@@ -6,17 +6,14 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
-
-require('./backend/models/device'); //подключение моделей БД
 require('./backend/models/features');
-require('./backend/models/test');
+require('./backend/models/device'); //подключение моделей БД
 
 var app = express(); //конструктор приложения на express
-var deviceRoutes = require('./backend/routes/device'); //подключение роутов для articles
+var deviceRoutes = require('./backend/routes/device');
 var featuresRoutes = require('./backend/routes/features');
-var testRoutes = require('./backend/routes/test');
 
-mongoose.connect('mongodb://localhost:27017/deviceShop');
+mongoose.connect('mongodb://localhost:27017/products');
 
 app.set('view engine', 'html'); //настройка view движка
 
@@ -38,7 +35,6 @@ app.use(cookieParser());
 
 app.use('/api/products', deviceRoutes);
 app.use('/api/features', featuresRoutes);
-app.use('/api/test', testRoutes);
 
 app.use(function (req, res, next) {
    var err = new Error('Not Found');

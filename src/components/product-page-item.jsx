@@ -3,7 +3,6 @@ import {autobind} from 'core-decorators';
 import * as compareActions from '../actions/compare';
 import * as cartActions from '../actions/cart';
 import { connect } from 'react-redux';
-import * as productActions from '../actions/product';
 
 @connect (store => {
    return {
@@ -17,8 +16,8 @@ export default class ProductPageItem extends React.Component {
       super(props);
       console.log(props);
 
-       // this.product = products.find(p => p.id == this.props.params.id);
-      productActions.findProduct(this.props.params.id);
+      this.product = this.props.product.products.find(p => p.id == this.props.params.id);
+
 
       this.state = {
          count: 1,
@@ -28,7 +27,7 @@ export default class ProductPageItem extends React.Component {
    }
 
    add() {
-      let toDispatch = cartActions.add(this.props.product.product, this.state.count);
+      let toDispatch = cartActions.add(this.product, this.state.count);
       this.props.dispatch(toDispatch);
    }
 
@@ -49,13 +48,12 @@ export default class ProductPageItem extends React.Component {
 
    compare(e) {
       e.preventDefault();
-      let toDispatch = compareActions.compare(this.props.product);
+      let toDispatch = compareActions.compare(this.product);
       this.props.dispatch(toDispatch);
    }
 
    remove(e) {
       e.preventDefault();
-
    }
 
    handleChange(e) {
@@ -80,7 +78,7 @@ export default class ProductPageItem extends React.Component {
 
 
    render() {
-      if (this.props.product.isFinding){
+      if (this.product.isFinding){
          return (
              <div>
                 Product is finding
@@ -104,7 +102,7 @@ export default class ProductPageItem extends React.Component {
                 <div className="decorated-title">
                    <div className="page-header-wrapper">
                       <h1 className="page-header">
-                         {this.props.product.name}
+                         {this.product.name}
                       </h1>
                    </div>
                 </div>
@@ -115,8 +113,8 @@ export default class ProductPageItem extends React.Component {
                 <div className="product-gallery-wrapper cell-5 cell-12-sm">
                    <div className="product-gallery">
                       <div className="gallery-main-wrapper text-center hide-sm">
-                         <a href={this.props.product.img.src} id="gallery">
-                            <img src={this.props.product.img.src} />
+                         <a href={this.product.img.src} id="gallery">
+                            <img src={this.product.img.src} />
                          </a>
                       </div>
                    </div>
@@ -124,17 +122,17 @@ export default class ProductPageItem extends React.Component {
 
                 <div className="product-content-wrapper cell-7 cell-12-sm">
                    <div className="product-introtext on-page editor">
-                      {this.props.product.description}
+                      {this.product.description}
                    </div>
 
-                   {(this.props.product.id) ?
+                   {(this.product.id) ?
                        <form className="product-form" action="#">
                           <div className="option-selectors">
                              <div className="option-selector">
                                 <div className="option option-cvet is-select">
                                    <label className="option-label">Цвет</label>
-                                   <select value={this.props.color} onChange={this.handleChange} className="option-values">
-                                      {this.props.product.color.map((p, index) =>
+                                   <select value={this.product.color} onChange={this.handleChange} className="option-values">
+                                      {this.product.color.map((p, index) =>
                                           <option value={p.id} key={index}>{p.name}</option>
                                       )}
                                    </select>
@@ -144,11 +142,11 @@ export default class ProductPageItem extends React.Component {
 
                           <div className="product-sku-wrapper js-product-sku-wrapper">
                              <span>Артикул:</span>
-                             <span className="js-product-sku">{this.props.product.articul}</span>
+                             <span className="js-product-sku">{this.product.articul}</span>
                           </div>
 
                           <div className="product-prices on-page">
-                             <div className="price js-product-price on-page">{this.props.product.price.value} руб.</div>
+                             <div className="price js-product-price on-page">{this.product.price.value} руб.</div>
                           </div>
 
                           <div className="product-control on-page">
@@ -214,7 +212,7 @@ export default class ProductPageItem extends React.Component {
                       <div className="tabs-list product-tabs-list">
                          <div id="product-description" className={`tab-block ${filterContent}`}> {/*is-active*/}
                             <div className="editor">
-                               <p>{this.props.product.name}</p>
+                               <p>{this.product.name}</p>
                                <p>{this.product.description}
                                   <br/><br/>
                                </p>

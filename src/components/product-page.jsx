@@ -1,21 +1,28 @@
 import * as productActions from '../actions/product';
+import { connect } from 'react-redux';
 import SideBar from '../components/sidebar';
 import ProductItem from './productitem';
 // const products = require('../json/products.json');
 
 @connect (store => {
-   return {
-      product: store.product,
-   }
+   return store.product;
 })
 
 export default class ProductPage extends React.Component{
    constructor(props){
       super(props);
 
-      productActions.findProduct(this.props.params.id);
+      this.props.dispatch(productActions.getProducts());
    }
    render() {
+      if(this.props.isFinding) {
+         return (
+             <div>
+                Search...
+             </div>
+         )
+      }
+
       return (
           <div className="row">
 
@@ -55,7 +62,7 @@ export default class ProductPage extends React.Component{
                 </div>
 
                 <div className="products-list row">
-                   {this.props.product.map((p, index) =>
+                   {this.props.products.map((p, index) =>
                        <ProductItem {...p} key={index} />
                    )}
                 </div>

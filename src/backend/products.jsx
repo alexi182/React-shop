@@ -1,9 +1,12 @@
 import Service from './service';
 import axios from 'axios'; //делать запросы
-const prefix = '/products';
+const product_prefix = '/products';
+const features_prefix = '/features';
 
 export default class ProductService extends Service{
-   // constructor () {
+   constructor () {
+      super();
+
       // this.url = `${super.BaseUrl}${prefix}`;
 
       // this.get = (url) => axios.get(`${super.BaseUrl}${prefix}`).then((response) => {
@@ -12,10 +15,10 @@ export default class ProductService extends Service{
       //    }
       // });
 
-   // }
+   }
 
    getAllProducts(){
-      return axios.get(`${super.BaseUrl}${prefix}`).then((response) => {
+      return axios.get(`${super.BaseUrl}${product_prefix}`).then((response) => {
          if (response && response.data){
             return response.data
          }
@@ -23,11 +26,29 @@ export default class ProductService extends Service{
    }
 
    findProduct(id){
-      return axios.get(`${super.BaseUrl}${prefix}/find/${id}`).then((response) => {
+      return axios.get(`${super.BaseUrl}${product_prefix}/find/${id}`).then((response) => {
          if (response && response.data){
             return response.data
          }
       });
    }
+
+   getAllFeatures(){
+      return axios.get(`${super.BaseUrl}${features_prefix}`).then((response) => {
+         if (response && response.data){
+            return response.data
+         }
+      })
+   }
+
+   findProductFeature(id){
+      return axios.get(`${super.BaseUrl}${features_prefix}/find/${id}`).then((response) => {
+         if (response && response.data){
+            return response.data
+         }
+      });
+   }
+
+
 }
 
