@@ -18,7 +18,6 @@ export default class ProductPageItem extends React.Component {
 
       this.product = this.props.product.products.find(p => p.id == this.props.params.id);
 
-
       this.state = {
          count: 1,
          color: 1,
@@ -76,7 +75,6 @@ export default class ProductPageItem extends React.Component {
       })
    }
 
-
    render() {
       if (this.product.isFinding){
          return (
@@ -85,14 +83,12 @@ export default class ProductPageItem extends React.Component {
              </div>
          )
       }
+
       let filterActiveClass = this.state.active ? "is-active" : "is-closed";
-
       let filterDisActiveClass = !this.state.active ? "is-closed" : "is-active";
-
       let filterContent = this.state.active ? "is-active" : "is-closed";
 
-      // let isInCompare =  !!this.props.compare.find(p =>
-      // p.id == this.props.product.id);
+      let isInCompare =  !!this.props.compare.compare.find(p => p.id == this.props.product.id);
 
       return (
           <div className="page-content">
@@ -131,7 +127,7 @@ export default class ProductPageItem extends React.Component {
                              <div className="option-selector">
                                 <div className="option option-cvet is-select">
                                    <label className="option-label">Цвет</label>
-                                   <select value={this.product.color} onChange={this.handleChange} className="option-values">
+                                   <select value={this.state.color} onChange={this.handleChange} className="option-values">
                                       {this.product.color.map((p, index) =>
                                           <option value={p.id} key={index}>{p.name}</option>
                                       )}
@@ -222,12 +218,14 @@ export default class ProductPageItem extends React.Component {
                          <div id="product-characteristics" className={`tab-block ${filterContent}`}> {/*is-closed*/}
                             <div className="editor">
                                <table className="table table-bordered table-striped table-hover">
-                                  {this.product.features.map((p, index) =>
-                                      <tr key={index}>
-                                         <td>{p.item}</td>
-                                         <td>{p.name}</td>
-                                      </tr>
-                                  )}
+                                  <tbody>
+                                     {this.product.features.map((p, index) =>
+                                         <tr key={index}>
+                                            <td>{p.item}</td>
+                                            <td>{p.name}</td>
+                                         </tr>
+                                     )}
+                                  </tbody>
                                </table>
                             </div>
                          </div>
