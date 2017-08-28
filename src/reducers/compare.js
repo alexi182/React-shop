@@ -1,6 +1,8 @@
 import * as constants from '../constansts/compare';
 
-export default function compareReducers(state ={ compare:[] }, action ) {
+export default function compareReducers(state = {
+   compare:[] }, action ) {
+
    switch (action.type) {
       case constants.COMPARE: {
 

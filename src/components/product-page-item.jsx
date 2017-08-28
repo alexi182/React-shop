@@ -71,12 +71,11 @@ export default class ProductPageItem extends React.Component {
       e.preventDefault();
 
       this.setState({
-         active: this.state.active
+         active: this.state.active,
       })
    }
 
-
-   render() { debugger;
+   render() {
       if (this.product.isFinding){
          return (
              <div>
@@ -84,13 +83,12 @@ export default class ProductPageItem extends React.Component {
              </div>
          )
       }
+
       let filterActiveClass = this.state.active ? "is-active" : "is-closed";
-
       let filterDisActiveClass = !this.state.active ? "is-closed" : "is-active";
-
       let filterContent = this.state.active ? "is-active" : "is-closed";
 
-      let isInCompare =  !!this.compare.find(p => p.id == this.product.id);
+      let isInCompare =  !!this.props.compare.compare.find(p => p.id == this.props.product.id);
 
       return (
           <div className="page-content">
@@ -129,7 +127,7 @@ export default class ProductPageItem extends React.Component {
                              <div className="option-selector">
                                 <div className="option option-cvet is-select">
                                    <label className="option-label">Цвет</label>
-                                   <select value={this.product.color} onChange={this.handleChange} className="option-values">
+                                   <select value={this.state.color} onChange={this.handleChange} className="option-values">
                                       {this.product.color.map((p, index) =>
                                           <option value={p.id} key={index}>{p.name}</option>
                                       )}
@@ -219,14 +217,16 @@ export default class ProductPageItem extends React.Component {
 
                          <div id="product-characteristics" className={`tab-block ${filterContent}`}> {/*is-closed*/}
                             <div className="editor">
-                               {/*<table className="table table-bordered table-striped table-hover">*/}
-                               {/*{this.product.features.map((p, index) =>*/}
-                               {/*<tr key={index}>*/}
-                               {/*<td>{p.item}</td>*/}
-                               {/*<td>{p.name}</td>*/}
-                               {/*</tr>*/}
-                               {/*)}*/}
-                               {/*</table>*/}
+                               <table className="table table-bordered table-striped table-hover">
+                                  <tbody>
+                                     {this.product.features.map((p, index) =>
+                                         <tr key={index}>
+                                            <td>{p.item}</td>
+                                            <td>{p.name}</td>
+                                         </tr>
+                                     )}
+                                  </tbody>
+                               </table>
                             </div>
                          </div>
                       </div>
