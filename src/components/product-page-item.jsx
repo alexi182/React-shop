@@ -18,7 +18,6 @@ export default class ProductPageItem extends React.Component {
 
       this.product = this.props.product.products.find(p => p.id == this.props.params.id);
 
-
       this.state = {
          count: 1,
          color: 1,
@@ -72,12 +71,12 @@ export default class ProductPageItem extends React.Component {
       e.preventDefault();
 
       this.setState({
-         active: this.state.active,
+         active: this.state.active
       })
    }
 
 
-   render() {
+   render() { debugger;
       if (this.product.isFinding){
          return (
              <div>
@@ -91,8 +90,7 @@ export default class ProductPageItem extends React.Component {
 
       let filterContent = this.state.active ? "is-active" : "is-closed";
 
-      // let isInCompare =  !!this.props.compare.find(p =>
-      // p.id == this.props.product.id);
+      let isInCompare =  !!this.compare.find(p => p.id == this.product.id);
 
       return (
           <div className="page-content">
@@ -221,14 +219,14 @@ export default class ProductPageItem extends React.Component {
 
                          <div id="product-characteristics" className={`tab-block ${filterContent}`}> {/*is-closed*/}
                             <div className="editor">
-                               <table className="table table-bordered table-striped table-hover">
-                                  {this.product.features.map((p, index) =>
-                                      <tr key={index}>
-                                         <td>{p.item}</td>
-                                         <td>{p.name}</td>
-                                      </tr>
-                                  )}
-                               </table>
+                               {/*<table className="table table-bordered table-striped table-hover">*/}
+                               {/*{this.product.features.map((p, index) =>*/}
+                               {/*<tr key={index}>*/}
+                               {/*<td>{p.item}</td>*/}
+                               {/*<td>{p.name}</td>*/}
+                               {/*</tr>*/}
+                               {/*)}*/}
+                               {/*</table>*/}
                             </div>
                          </div>
                       </div>

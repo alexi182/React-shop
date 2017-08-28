@@ -1,6 +1,10 @@
 var mongoose = require('mongoose');
 var deviceSchema = new mongoose.Schema({
    _id: mongoose.Schema.Types.ObjectId,
+   id: {
+      type: String,
+      required: true
+   },
    type: {
       type: String,
       required: true
@@ -39,4 +43,4 @@ var deviceSchema = new mongoose.Schema({
    },
 });
 
-mongoose.model('Device', deviceSchema, 'devices');
+mongoose.model('Device', deviceSchema, 'device');

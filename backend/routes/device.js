@@ -10,21 +10,16 @@ router.get('/', function (request, response, next) {
          return next(err);
       }
       var q = devices.map(function(device){
-             return new Promise(function (resolve, reject) {
-                Features.find({
-                       _id: device.featuresId
-                    },
-                    function (err,features) {
-                       if(err) {
-                          reject(err)
-                       }
-                       device.features = features;
-                       resolve();
-                    }
-                )
-             })
-          }
-      );
+         return new Promise(function (resolve, reject) {
+            Features.find({_id: device.featuresId}, function (err,features) {
+               if(err) {
+                  reject(err)
+               }
+               device.features = features;
+               resolve();
+            })
+         })
+      });
       Promise.all(q).then(function () {
          response.json(devices);
       })
