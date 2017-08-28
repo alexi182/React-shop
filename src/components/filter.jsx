@@ -50,7 +50,7 @@ export default class Filter extends React.Component{
 
    render() {
       let filters = this.state.filters.map((f, index) =>
-          <FilterItem {...f} select={this.select} key={index} />s);
+          <FilterItem {...f} select={this.select} key={index} />);
 
       let filterClass = this.state.opened ? "is-open" : "is-close";
       let buttonClass = this.state.opened ? "is-active" : "";

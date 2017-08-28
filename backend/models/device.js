@@ -41,27 +41,6 @@ var deviceSchema = new mongoose.Schema({
          default: 'руб.'
       }
    },
-   diag: {
-      type: Number,
-   },
-   wifi: {
-      type: String,
-   },
-   screen: {
-      type: String,
-   },
-   garanty: {
-      type: String,
-   },
-   ram: {
-      type: String,
-   },
-   sim: {
-      type: Number,
-   },
-   accum: {
-      type: String,
-   },
    color: [{
       id: Number,
       name: String
@@ -73,4 +52,4 @@ var deviceSchema = new mongoose.Schema({
    }]
 });
 
-mongoose.model('Device', deviceSchema, 'device');
+mongoose.model('Device', deviceSchema, 'devices');

@@ -86,9 +86,9 @@ export default class ProductPageItem extends React.Component {
 
       let filterActiveClass = this.state.active ? "is-active" : "is-closed";
       let filterDisActiveClass = !this.state.active ? "is-closed" : "is-active";
-      let filterContent = this.state.active ? "is-active" : "is-closed";
+      let filterContent = this.state.active ? "is-active" : "is-closed"; debugger;
 
-      let isInCompare =  !!this.props.compare.compare.find(p => p.id == this.props.product.id);
+      let isInCompare =  !!this.props.compare.compare.find(p => p.id == this.props.params.id);
 
       return (
           <div className="page-content">
