@@ -1,6 +1,6 @@
 import * as constants from '../constansts/cart';
 
-function countSum(cart) {
+function countSum(cart) { debugger;
    return cart.reduce((prev, cur) => prev + cur.count * cur.product.price.value, 0);
 }
 

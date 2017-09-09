@@ -12,7 +12,8 @@ module.exports = {
    },
    output: {
       path: path.join(__dirname, 'dist'),
-      filename: '[name].js'
+      filename: '[name].js',
+      publicPath: '/'
    },
    module: {
       rules: [{
@@ -131,13 +132,13 @@ module.exports = {
          axios: 'axios',
          ReactDOM: 'react-dom',
       }),
-      new BrowserSyncPlugin({
+    /*  new BrowserSyncPlugin({
          host: 'localhost',
          port: 3000,
          server: {
             baseDir: ['dist']
          }
-      }),
+      }),*/
       new ExtractTextPlugin({
          allChunks: true,
          filename: 'style.css'

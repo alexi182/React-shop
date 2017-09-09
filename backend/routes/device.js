@@ -33,10 +33,12 @@ router.get('/', function (request, response, next) {
 
 router.get('/find/:id', function (request, response, next) {
    var id = request.params.id;
-   Devices.find({id:id}, function (err, device) {
-      if (err) {
+   console.log(id);
+   Devices.findOne({id:id}, function (err, device) {
+      if (err) { console.log(err);
          return next(err);
       }
+      console.log(device);
       response.json(device);
    });
 });

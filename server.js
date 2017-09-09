@@ -20,11 +20,10 @@ app.set('view engine', 'html'); //настройка view движка
 app.use(function (req, res, next) { //middleware для настроки CORS запросов
    res.header("Access-Control-Allow-Origin", "*");
    res.header("Access-Control-Allow-Headers", "X-Requested-With");
-
    next();
 }) ;
 
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(path.join(__dirname, 'dist')));
 app.use(logger('combined'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -36,10 +35,18 @@ app.use(cookieParser());
 app.use('/api/products', deviceRoutes);
 app.use('/api/filters', filtersRoutes);
 
+// app.get('*', function (req, res, next) {
+//    /*var err = new Error('Not Found');
+//     err.status = 404;
+//     next(err);*/
+//    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+// });
+
 app.use(function (req, res, next) {
    var err = new Error('Not Found');
-   err.status = 404;
-   next(err);
+    err.status = 404;
+   /* next(err);*/
+   res.sendFile(path.join(__dirname,'dist', 'index.html'));
 });
 
 app.use(function (err, req, res, next) {

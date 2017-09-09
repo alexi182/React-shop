@@ -1,17 +1,16 @@
-import * as productActions from '../actions/product';
+import * as productActions from '../actions/products';
 import { connect } from 'react-redux';
 import SideBar from '../components/sidebar';
 import ProductItem from './productitem';
 // const products = require('../json/products.json');
 
 @connect (store => {
-   return store.product;
+   return store.products;
 })
 
 export default class ProductPage extends React.Component{
    constructor(props){
       super(props);
-
       this.props.dispatch(productActions.getProducts());
    }
    render() {
