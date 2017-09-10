@@ -32,7 +32,7 @@ export default class ProductPageItem extends React.Component {
    }
 
    add() {
-      let toDispatch = cartActions.add(this.product, this.state.count);
+      let toDispatch = cartActions.add(this.props.product.product, this.state.count);
       this.props.dispatch(toDispatch);
    }
 
@@ -53,7 +53,7 @@ export default class ProductPageItem extends React.Component {
 
    compare(e) {
       e.preventDefault();
-      let toDispatch = compareActions.compare(this.product);
+      let toDispatch = compareActions.compare(this.props.product.product);
       this.props.dispatch(toDispatch);
    }
 
@@ -93,7 +93,6 @@ export default class ProductPageItem extends React.Component {
       let filterActiveClass = this.state.active ? "is-active" : "is-closed";
       let filterDisActiveClass = !this.state.active ? "is-closed" : "is-active";
       let filterContent = this.state.active ? "is-active" : "is-closed";
-
       let isInCompare =  !!this.props.compare.compare.find(p => p.id == this.props.params.id);
 
       return (
@@ -215,7 +214,7 @@ export default class ProductPageItem extends React.Component {
                          <div id="product-description" className={`tab-block ${filterContent}`}> {/*is-active*/}
                             <div className="editor">
                                <p>{product.name}</p>
-                               <p>{product.description}
+                               <p>{product.fullDescription}
                                   <br/><br/>
                                </p>
                             </div>
@@ -227,8 +226,8 @@ export default class ProductPageItem extends React.Component {
                                   <tbody>
                                      {product.features.map((p, index) =>
                                          <tr key={index}>
-                                            <td>{p.item}</td>
                                             <td>{p.name}</td>
+                                            <td>{p.value}</td>
                                          </tr>
                                      )}
                                   </tbody>

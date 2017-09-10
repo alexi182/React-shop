@@ -5,18 +5,19 @@ import { connect } from 'react-redux';
 
 const TableView = (props) => {
 
-   const names = [
+ /*  const names = [
       'name','img',
-   ];
+   ];*/
 
    let Table = {};
+   let num = props.compare.length;
 
    for (let p of props.compare) {
       for(let o of p.features) {
-         if (!Table[o.item]){
-            Table[o.item] = [];
+         if (!Table[o.name]){ // если в Table нету свойства o.name
+            Table[o.name] = []; //создаём в table пустой массив по свойству или ключу o.name
          }
-         Table[o.item].push(o.name)
+         Table[o.name].push(o.value); //кладём значения в этот массив с ключом o.name
       }
       if (!Table['имя']){
          Table['имя'] = [];
@@ -25,38 +26,54 @@ const TableView = (props) => {
          Table['картинка'] = [];
       }
       Table['имя'].push({
-         name: p.name,
-         link: p.link
+         id: p.id,
+         name: p.name
       });
       Table['картинка'].push(p.img)
    }
 
    let rows =[];
+   let index = 0;
    for(let prop in Table) {
-      let item = Table[prop];
-      rows.push(
-          <div className="table-row">
-             <div className="table-cell param-title table-row-title">{prop}</div>
-             {
-                item.map((p,index) =>
-                    <div className="table-cell param-value" key={index}>
-                       {
-                          prop == 'имя' ?
-                              <div className="product-title">
-                                 <Link to={p.link}>
-                                    {p.name}
-                                 </Link>
-                              </div>: null
-                       }
-                       {
-                          prop == 'картинка' ? <img src={p.src} alt={p.alt} title={p.title} />: null
-                       }
-                       {prop !== 'имя' && prop!== 'картинка' ? p : null}
-                    </div>
-                )
-             }
-          </div>
-      )
+      let item = Table[prop]; //массив выводимых свойств таблицы
+      if (item.length !== num) {
+         let c = num - item.length;
+         for(let i=0; i<c; i++) {
+            item.push('');
+         }
+      }
+
+      let div = <div className="table-row">
+         <div className="table-cell param-title table-row-title">{prop}</div>
+         {
+            item.map((p,index) =>
+                <div className="table-cell param-value" key={index}>
+                   {
+                      prop == 'имя' ?
+                          <div className="product-title">
+                             <Link to={`/product/${p.id}`}>
+                                {p.name}
+                             </Link>
+                          </div>: null
+                   }
+                   {
+                      prop == 'картинка' ? <img src={p.src} alt={p.alt} title={p.title} />: null
+                   }
+                   {prop !== 'имя' && prop!== 'картинка' ? p : null}
+                </div>
+            )
+         }
+      </div>;
+
+       if(prop == 'имя') {
+          rows.unshift(div);
+       }  else if (prop == 'картинка') {
+          rows.splice(1,0,div);
+       }  else {
+          rows.push(div);
+       }
+
+      index ++
    }
 
    return (
