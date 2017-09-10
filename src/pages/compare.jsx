@@ -30,6 +30,7 @@ const TableView = (props) => {
          name: p.name
       });
       Table['картинка'].push(p.img)
+
    }
 
    let rows =[];
