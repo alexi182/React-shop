@@ -124,7 +124,7 @@ module.exports = {
       new webpack.NoEmitOnErrorsPlugin(),
       new HtmlWebpackPlugin({
          template: path.join(__dirname, 'src', 'index.html'),
-         filename: path.join(__dirname, 'dist', 'index.html')
+         filename: path.join(__dirname, 'index.html')
       }),
       new webpack.ProvidePlugin({
          React: 'react',
