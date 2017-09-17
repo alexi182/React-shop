@@ -9,10 +9,10 @@ function add(product, count) {
    };
 }
 
-function makeOrder(order) {
+function makeOrder(product) {
    return {
       type: constants.ORDER,
-      payload: order
+      payload: product
    };
 }
 

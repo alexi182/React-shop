@@ -3,6 +3,7 @@ import {autobind} from 'core-decorators';
 import * as compareActions from '../actions/compare';
 import * as cartActions from '../actions/cart';
 import * as productActions from '../actions/product';
+import {Link} from 'react-router';
 import { connect } from 'react-redux';
 
 @connect (store => {
@@ -23,6 +24,7 @@ export default class ProductPageItem extends React.Component {
          count: 1,
          color: 1,
          active: true,
+         closed: false
         /* isFound: false*/
       };
    }
@@ -59,6 +61,8 @@ export default class ProductPageItem extends React.Component {
 
    remove(e) {
       e.preventDefault();
+      let toDispatch = compareActions.remove(this.props.product.product);
+      this.props.dispatch(toDispatch);
    }
 
    handleChange(e) {
@@ -73,11 +77,12 @@ export default class ProductPageItem extends React.Component {
       })
    }
 
-   clickTab(index, e) {
+   clickTab(e) {
       e.preventDefault();
 
       this.setState({
-         active: this.state.active,
+         closed: !this.state.active,
+         active: this.state.active
       })
    }
 
@@ -90,10 +95,11 @@ export default class ProductPageItem extends React.Component {
          )
       }
       let product = this.props.product.product;
-      let filterActiveClass = this.state.active ? "is-active" : "is-closed";
-      let filterDisActiveClass = !this.state.active ? "is-closed" : "is-active";
-      let filterContent = this.state.active ? "is-active" : "is-closed";
       let isInCompare =  !!this.props.compare.compare.find(p => p.id == this.props.params.id);
+
+      let activeTab = this.state.active ? "is-active" : "is-closed";
+      let closedTab = this.state.closed ? "is-active" : "is-closed";
+      let filterContent = this.state.active ? "is-active" : "is-closed";
 
       return (
           <div className="page-content">
@@ -141,7 +147,7 @@ export default class ProductPageItem extends React.Component {
                              </div>
                           </div>
 
-                          <div className="product-sku-wrapper js-product-sku-wrapper">
+                          <div className="product-sku-wrapper">
                              <span>Артикул:</span>
                              <span className="js-product-sku">{product.articul}</span>
                           </div>
@@ -151,7 +157,7 @@ export default class ProductPageItem extends React.Component {
                           </div>
 
                           <div className="product-control on-page">
-                             <div className="counter js-product-quantity">
+                             <div className="counter">
                                 <button type="button" className="counter-button button count-down icon fa fa-minus" onClick={this.dec}>
                                 </button>
 
@@ -162,7 +168,7 @@ export default class ProductPageItem extends React.Component {
                              </div>
 
                              <div className="buy">
-                                <div className="product-order-variant variant-shown js-variant-shown">
+                                <div className="product-order-variant variant-shown">
                                    <button className="product-button button is-primary" type="button" onClick={this.add}>
                                       <i className="icon buy-icon ion-ios-cart-outline"></i>
                                       <span className="button-text">В корзину</span>
@@ -201,10 +207,10 @@ export default class ProductPageItem extends React.Component {
                    <div className="product-content">
                       <div className="tabs-menu-wrapper">
                          <ul className="tabs-menu product-tabs-list">
-                            <li className={`tabs-menu-item ${filterActiveClass}`} onClick={this.clickTab}>
+                            <li className={`tabs-menu-item ${activeTab}`} onClick={this.clickTab}>
                                <a href="#" className="tabs-menu-link">Описание</a>
                             </li>
-                            <li className={`tabs-menu-item ${filterDisActiveClass}`} onClick={this.clickTab}>
+                            <li className={`tabs-menu-item ${closedTab}`} onClick={this.clickTab}>
                                <a href="#product-characteristics" className="tabs-menu-link">Характеристики</a>
                             </li>
                          </ul>

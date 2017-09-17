@@ -7,7 +7,6 @@ function findProduct(id) {
    return {
       type: productConstants.FIND,
       payload: productService.findProduct(id)
-
    }
 }
 

@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 @connect (store => {
    return store.cart
 })
+
 @autobind()
 export default class Cart extends React.Component{
    constructor(props) {
@@ -20,6 +21,11 @@ export default class Cart extends React.Component{
       let toDispatch = actions.remove(id);
       this.props.dispatch(toDispatch);
    };
+
+   order=(id) => () => {
+       let toDispatch = actions.makeOrder(id);
+      this.props.dispatch(toDispatch);
+    };
 
    inc=(id) => () => {
       let toDispatch = actions.inc(id);
@@ -119,7 +125,7 @@ export default class Cart extends React.Component{
                              <span className="summ-number js-shopcart-total-summ">{`${this.props.sum}  руб`}</span>
                           </div>
 
-                          <button type="submit" className="cart-checkout button is-primary" data-cart-submit="">Оформить заказ</button>
+                          <Link to="/order" type="submit" className="cart-checkout button is-primary" /*{onClick={this.order(item.product.id)}}*/>Оформить заказ</Link>
                        </div>
                     </div>
 

@@ -27,7 +27,6 @@ export default function cartReducers(state = { cart:[], sum:0 }, action) {
 
       case constants.REMOVE: {
          let cart = state.cart.slice();
-
          let cartIndex = cart.findIndex((p) => p.product.id == action.payload);
 
          if(cartIndex !== -1) {

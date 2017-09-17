@@ -7,10 +7,10 @@ function compare(product) {
    }
 }
 
-function remove(id) {
+function remove(product) {
    return {
       type: constants.DELETE,
-      payload: id
+      payload: product
    }
 }
 

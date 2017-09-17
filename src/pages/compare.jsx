@@ -74,6 +74,8 @@ const TableView = (props) => {
           rows.push(div);
        }
 
+       rows.
+
       index ++
    }
 
@@ -89,6 +91,7 @@ const TableView = (props) => {
 @connect (store => {
    return store.compare
 })
+
 @autobind()
 export default class ComparePage extends React.Component {
    constructor(props) {

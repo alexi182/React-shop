@@ -124,7 +124,7 @@ module.exports = {
       new webpack.NoEmitOnErrorsPlugin(),
       new HtmlWebpackPlugin({
          template: path.join(__dirname, 'src', 'index.html'),
-         filename: path.join(__dirname, 'index.html')
+         filename: path.join(__dirname, 'dist', 'index.html')
       }),
       new webpack.ProvidePlugin({
          React: 'react',
@@ -132,13 +132,13 @@ module.exports = {
          axios: 'axios',
          ReactDOM: 'react-dom',
       }),
-    /*  new BrowserSyncPlugin({
-         host: 'localhost',
-         port: 3000,
-         server: {
-            baseDir: ['dist']
-         }
-      }),*/
+       new BrowserSyncPlugin({
+       host: 'localhost',
+       port: 3000,
+       server: {
+       baseDir: ['dist']
+       }
+       }),
       new ExtractTextPlugin({
          allChunks: true,
          filename: 'style.css'
