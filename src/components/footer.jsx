@@ -8,7 +8,6 @@ export default class Footer extends React.Component {
           <footer className="footer">
              <div className="container">
                 <div className="row">
-
                    <MenuContainer classList="footer-block footer-menu-wrapper cell-3 cell-12-sm" isVertical={true}>
                       <Menu menuType={'footer'}>
                          <MenuItem name={'Доставка'} href={'/delivery'} />

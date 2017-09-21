@@ -86,7 +86,7 @@ export default class ProductPageItem extends React.Component {
 
       let filterActiveClass = this.state.active ? "is-active" : "is-closed";
       let filterDisActiveClass = !this.state.active ? "is-closed" : "is-active";
-      let filterContent = this.state.active ? "is-active" : "is-closed"; debugger;
+      let filterContent = this.state.active ? "is-active" : "is-closed";
 
       let isInCompare =  !!this.props.compare.compare.find(p => p.id == this.props.params.id);
 
@@ -219,12 +219,12 @@ export default class ProductPageItem extends React.Component {
                             <div className="editor">
                                <table className="table table-bordered table-striped table-hover">
                                   <tbody>
-                                     {this.product.features.map((p, index) =>
-                                         <tr key={index}>
-                                            <td>{p.item}</td>
-                                            <td>{p.name}</td>
-                                         </tr>
-                                     )}
+                                  {this.product.features.map((p, index) =>
+                                      <tr key={index}>
+                                         <td>{p.item}</td>
+                                         <td>{p.name}</td>
+                                      </tr>
+                                  )}
                                   </tbody>
                                </table>
                             </div>

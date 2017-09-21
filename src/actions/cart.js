@@ -19,7 +19,7 @@ function makeOrder(order) {
 function remove(id) {
    return {
       type: constants.REMOVE,
-      payload: id
+          payload: id
    };
 }
 

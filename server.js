@@ -6,12 +6,12 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
-// require('./backend/models/features');
+require('./backend/models/filters');
 require('./backend/models/device'); //подключение моделей БД
 
 var app = express(); //конструктор приложения на express
 var deviceRoutes = require('./backend/routes/device');
-// var featuresRoutes = require('./backend/routes/features');
+var filtersRoutes = require('./backend/routes/filters');
 
 mongoose.connect('mongodb://localhost:27017/products');
 
@@ -34,7 +34,7 @@ app.use(cookieParser());
 //app.use(favicon(__dirname + '/public/img/favicon.ico'));
 
 app.use('/api/products', deviceRoutes);
-// app.use('/api/features', featuresRoutes);
+app.use('/api/filters', filtersRoutes);
 
 app.use(function (req, res, next) {
    var err = new Error('Not Found');
@@ -50,6 +50,6 @@ app.use(function (err, req, res, next) {
    });
 });
 
-app.listen(8085, function () { //запуск приложения на порте 8081
+app.listen(8085, function () {
    console.log('Server listening on port 8085');
 });
