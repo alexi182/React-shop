@@ -1,4 +1,3 @@
-const FIND = 'PRODUCT_FIND';
-const GET = 'PRODUCTS_GET'
+const GET = 'PRODUCT_GET';
 
-export { FIND,GET };
+export { GET };

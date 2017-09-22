@@ -11,20 +11,23 @@ export default class SideBar extends React.Component {
       this.state = {
          isReady: false
       };
+   }
 
+   componentDidMount(){
       let Path = window.location.pathname.split('/').pop();
 
-      axios.get('http://localhost:8085/api/filters/'+Path.substr(0,Path.length-1)).then((response) => {
-         this.filters = response.data;
-         this.setState({
-            isReady: true
-         })
-      })
+      axios.get('http://localhost:8085/api/filters/'+Path.substr(0, Path.length-1))
+          .then((response) => {
+             this.filters = response.data;
+             this.setState({
+                isReady: true
+             })
+          })
    }
 
    render() {
-      if(!this.state.isReady) return <div>-</div>; //если не готов компонент, то мы его ен выводим. когда всё готово у нас есть свойство filters и мы его выводим.
 
+      if(!this.state.isReady) return <div>Loading</div>;
       return (
           <div className="page-sidebar cell-3 cell-4-md hide-sm">
              <div className="collection-menu-wrapper sidebar-block">

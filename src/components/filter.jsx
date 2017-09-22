@@ -2,7 +2,7 @@ import {autobind} from 'core-decorators';
 
 const FilterItem = (props) => {
    let select = () => {
-      props.select(props.id);
+     props.select(props.id);
    };
 
    return (
@@ -20,7 +20,7 @@ export default class Filter extends React.Component{
 
       this.state = {
          filters: this.props.values, //передал из sidebar.jsx  45с.
-         opened: false, //начальное состоние
+         opened: false,
          selected: []
       }
    }
@@ -33,32 +33,23 @@ export default class Filter extends React.Component{
 
    select(id) {
       let filters = this.state.filters.slice();
-
-      // let filter = filters.find(f => f.id == id);
-      let filter = filters[id] || null;
       let selected = this.state.selected.slice();
+      let filter = filters[id] || null;
 
-      //if(filter) {
-      // if (!filter.selected) {   //если в фильтре не объявлено свойство selected, то фильтр не был выбран изначально
-      //    filter.selected = false;
-      // }
-      //
-      // filter.selected = !filter.selected;
-
-      if(selected.includes(filter)) {
-         selected = selected.filter(e => e != filter);
+      if (selected.includes(filter)) {
+         selected = selected.filter(e => e!==filter);
       } else {
          selected.push(filter)
       }
+
       this.setState ({
          selected
-      });
-      // }
+      })
    }
 
    render() {
       let filters = this.state.filters.map((f, index) =>
-          <FilterItem /*{...f}*/ value={f} id={index} selected={this.state.selected.includes(f)} select={this.select} key={index} />);
+          <FilterItem value={f} selected={this.state.selected.includes(f)} id={index} select={this.select} key={index} />);
 
       let filterClass = this.state.opened ? "is-open" : "is-close";
       let buttonClass = this.state.opened ? "is-active" : "";
