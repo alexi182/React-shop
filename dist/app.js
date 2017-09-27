@@ -14561,6 +14561,10 @@ var _breadcrumbs = __webpack_require__(184);
 
 var _breadcrumbs2 = _interopRequireDefault(_breadcrumbs);
 
+var _tabsItem = __webpack_require__(374);
+
+var _tabsItem2 = _interopRequireDefault(_tabsItem);
+
 var _coreDecorators = __webpack_require__(23);
 
 var _compare = __webpack_require__(92);
@@ -14739,6 +14743,7 @@ var ProductPageItem = (_dec = (0, _reactRedux.connect)(function (store) {
                React.createElement(
                   'div',
                   { className: 'product-content-wrapper cell-7 cell-12-sm' },
+                  React.createElement(_tabsItem2.default, null),
                   React.createElement(
                      'div',
                      { className: 'product-introtext on-page editor' },
@@ -17974,6 +17979,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _class;
+
 var _menu = __webpack_require__(51);
 
 var _menu2 = _interopRequireDefault(_menu);
@@ -17994,6 +18001,8 @@ var _axios = __webpack_require__(85);
 
 var _axios2 = _interopRequireDefault(_axios);
 
+var _coreDecorators = __webpack_require__(23);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -18002,7 +18011,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var SideBar = function (_React$Component) {
+var SideBar = (0, _coreDecorators.autobind)(_class = function (_React$Component) {
    _inherits(SideBar, _React$Component);
 
    function SideBar(props) {
@@ -18017,6 +18026,23 @@ var SideBar = function (_React$Component) {
    }
 
    _createClass(SideBar, [{
+      key: 'filter',
+      value: function filter() {
+         var filter = this.filterComponents.reduce(function (p, n, index) {
+            var selected = n.state.selected;
+            if (selected.length !== 0) {
+               p['selected'] = [];
+            }
+            p['selected'].push({
+               name: n.props.name,
+               selected: selected
+            });
+            return p;
+         }, {});
+         filter.type = this.filters.productType;
+         console.log(filter);
+      }
+   }, {
       key: 'componentDidMount',
       value: function componentDidMount() {
          var _this2 = this;
@@ -18033,12 +18059,15 @@ var SideBar = function (_React$Component) {
    }, {
       key: 'render',
       value: function render() {
-
          if (!this.state.isReady) return React.createElement(
             'div',
             null,
             'Loading'
          );
+
+         this.filterComponents = this.filters.features.map(function (item, index) {
+            return React.createElement(_filter2.default, _extends({}, item, { key: index }));
+         });
          return React.createElement(
             'div',
             { className: 'page-sidebar cell-3 cell-4-md hide-sm' },
@@ -18074,18 +18103,16 @@ var SideBar = function (_React$Component) {
             ),
             React.createElement(
                'form',
-               { className: 'collection-filter ', action: '#', method: 'get' },
+               { className: 'collection-filter', action: '#', method: 'get' },
                React.createElement(
                   'div',
                   { className: 'collection-filter-header' },
                   '\u0424\u0438\u043B\u044C\u0442\u0440'
                ),
-               this.filters.features.map(function (item, index) {
-                  return React.createElement(_filter2.default, _extends({}, item, { key: index }));
-               }),
+               this.filterComponents,
                React.createElement(
                   'button',
-                  { type: 'submit', className: 'filter-submit button is-primary' },
+                  { type: 'submit', className: 'filter-submit button is-primary', onClick: this.filter },
                   '\u041F\u0440\u0438\u043C\u0435\u043D\u0438\u0442\u044C'
                )
             )
@@ -18094,7 +18121,7 @@ var SideBar = function (_React$Component) {
    }]);
 
    return SideBar;
-}(React.Component);
+}(React.Component)) || _class;
 
 exports.default = SideBar;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
@@ -36265,6 +36292,217 @@ ReactDOM.render(React.createElement(
    )
 ), page);
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(163), __webpack_require__(3)))
+
+/***/ }),
+/* 374 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(React) {
+
+Object.defineProperty(exports, "__esModule", {
+   value: true
+});
+exports.default = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _dec, _class;
+
+var _coreDecorators = __webpack_require__(23);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var tabsItems = [{
+   title: 'Дерево',
+   text: 'Деревья деревянные',
+   treeItems: [{
+      title: 'Деревянные дела №1',
+      treeItems: [{
+         title: 'Отпилить берёзу'
+      }, {
+         title: 'Снять кору'
+      }, {
+         title: 'Напильником сделать буратино',
+         treeItems: [{
+            title: 'Отдать буратино в школу Барабаса'
+         }, {
+            title: 'Порвать холст на очаге его носом'
+         }]
+      }]
+   }]
+}, {
+   title: 'Дела',
+   text: 'Дела все не переделать',
+   treeItems: [{
+      title: 'Дела не очень важные',
+      treeItems: [{
+         title: 'Отпилить берёзу'
+      }, {
+         title: 'Снять кору'
+      }, {
+         title: 'Напильником сделать буратино',
+         treeItems: []
+      }]
+   }, {
+      title: 'Дела очень важные'
+   }]
+}, {
+   title: 'Поручения',
+   text: 'Сюда лучше не заглядывать',
+   treeItems: []
+}];
+
+var Tree = (_dec = (0, _coreDecorators.autobind)(), _dec(_class = function (_React$Component) {
+   _inherits(Tree, _React$Component);
+
+   function Tree() {
+      var _ref;
+
+      var _temp, _this, _ret;
+
+      _classCallCheck(this, Tree);
+
+      for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+         args[_key] = arguments[_key];
+      }
+
+      return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Tree.__proto__ || Object.getPrototypeOf(Tree)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+         expanded: false
+      }, _this.toggleExpanded = function () {
+         _this.setState({
+            expanded: !_this.state.expanded
+         });
+      }, _this.renderItem = function (item, key) {
+         return React.createElement(
+            'li',
+            { key: key },
+            React.createElement(
+               'span',
+               { onClick: _this.toggleExpanded },
+               item.title
+            ),
+            _this.state.expanded && item.treeItems && React.createElement(Tree, { treeItems: item.treeItems })
+         );
+      }, _temp), _possibleConstructorReturn(_this, _ret);
+   }
+
+   _createClass(Tree, [{
+      key: 'render',
+      value: function render() {
+         var treeItems = this.props.treeItems;
+
+         return React.createElement(
+            'div',
+            null,
+            React.createElement(
+               'ul',
+               null,
+               treeItems.map(this.renderItem)
+            )
+         );
+      }
+   }]);
+
+   return Tree;
+}(React.Component)) || _class);
+
+var Tabs = function (_React$Component2) {
+   _inherits(Tabs, _React$Component2);
+
+   function Tabs() {
+      var _ref2;
+
+      var _temp2, _this2, _ret2;
+
+      _classCallCheck(this, Tabs);
+
+      for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+         args[_key2] = arguments[_key2];
+      }
+
+      return _ret2 = (_temp2 = (_this2 = _possibleConstructorReturn(this, (_ref2 = Tabs.__proto__ || Object.getPrototypeOf(Tabs)).call.apply(_ref2, [this].concat(args))), _this2), _this2.state = {
+         selectedIndex: 0
+      }, _this2.renderTab = function (selectedIndex) {
+         return function (item, key) {
+            return React.createElement(
+               'li',
+               {
+                  className: 'tabItem ' + (selectedIndex === key ? 'active' : ''),
+                  key: key,
+                  onClick: function onClick() {
+                     _this2.setState({
+                        selectedIndex: key
+                     });
+                  }
+               },
+               item.title
+            );
+         };
+      }, _temp2), _possibleConstructorReturn(_this2, _ret2);
+   }
+
+   _createClass(Tabs, [{
+      key: 'render',
+      value: function render() {
+         var tabsItems = this.props.tabsItems;
+         var selectedIndex = this.state.selectedIndex;
+
+
+         return React.createElement(
+            'div',
+            { className: 'Tabs' },
+            React.createElement(
+               'ul',
+               { className: 'tabsList' },
+               tabsItems.map(this.renderTab(selectedIndex))
+            ),
+            React.createElement(
+               'div',
+               { className: 'tabPanel' },
+               tabsItems && tabsItems[selectedIndex].text,
+               React.createElement(Tree, { treeItems: tabsItems[selectedIndex].treeItems })
+            )
+         );
+      }
+   }]);
+
+   return Tabs;
+}(React.Component);
+
+;
+
+var App = function (_React$Component3) {
+   _inherits(App, _React$Component3);
+
+   function App() {
+      _classCallCheck(this, App);
+
+      return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+   }
+
+   _createClass(App, [{
+      key: 'render',
+      value: function render() {
+         return React.createElement(
+            'div',
+            null,
+            React.createElement(Tabs, { tabsItems: tabsItems }),
+            '  //\u043E\u043F\u0440\u043E\u0432\u043A\u0438\u0434\u044B\u0432\u0430\u0435\u043C json \u0434\u0430\u043D\u043D\u044B\u0435 \u0432 \u043A\u043E\u043C\u043F\u043E\u043D\u0435\u043D\u0442 Tabs'
+         );
+      }
+   }]);
+
+   return App;
+}(React.Component);
+
+exports.default = App;
+;
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ })
 /******/ ]);

@@ -1,4 +1,5 @@
 import BreadCrumbs from '../components/breadcrumbs';
+import App from './tabs-item';
 import {autobind} from 'core-decorators';
 import * as compareActions from '../actions/compare';
 import * as cartActions from '../actions/cart';
@@ -122,6 +123,8 @@ export default class ProductPageItem extends React.Component {
                 </div>
 
                 <div className="product-content-wrapper cell-7 cell-12-sm">
+
+                   <App/>
                    <div className="product-introtext on-page editor">
                       {product.description}
                    </div>

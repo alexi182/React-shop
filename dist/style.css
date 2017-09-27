@@ -12052,4 +12052,25 @@ body {
   display: inline-block;
   margin-left: 5px; }
 
+.Tabs .tabsList {
+  list-style: none;
+  padding: 0;
+  margin: 5px; }
+  .Tabs .tabsList .tabItem {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 1px solid gray;
+    margin-right: 5px;
+    background: gray;
+    color: lightgray;
+    cursor: pointer; }
+    .Tabs .tabsList .tabItem.active {
+      background: #FFF;
+      color: #000; }
+
+.Tabs .tabPanel {
+  padding: 20px;
+  border: 1px solid gray;
+  max-width: 800px; }
+
 /*# sourceMappingURL=style.css.map*/
