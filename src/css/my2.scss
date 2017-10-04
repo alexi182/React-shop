@@ -3,3 +3,30 @@
 .logotype-text {
    font-size: $small;
 }
+
+
+.Tabs {
+   .tabsList {
+      list-style: none;
+      padding: 0;
+      margin: 5px;
+      .tabItem {
+         display: inline-block;
+         padding: 10px 20px;
+         border: 1px solid gray;
+         margin-right: 5px;
+         background: gray;
+         color: lightgray;
+         cursor: pointer;
+         &.active {
+            background: #FFF;
+            color: #000;
+         }
+      }
+   }
+   .tabPanel {
+      padding: 20px;
+      border: 1px solid gray;
+      max-width: 800px;
+   }
+}

@@ -7,6 +7,7 @@ import './css/common.scss';
 import './css/fontawesome.scss';
 import './css/fonts.scss';
 import './css/my.scss';
+import './css/my2.scss';
 
 
 // import './css/*.scss';

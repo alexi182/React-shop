@@ -24,7 +24,7 @@ export default class ProductPageItem extends React.Component {
          count: 1,
          color: 1,
          active: true,
-        /* isFound: false*/
+         /* isFound: false*/
       };
    }
 
@@ -124,7 +124,8 @@ export default class ProductPageItem extends React.Component {
 
                 <div className="product-content-wrapper cell-7 cell-12-sm">
 
-                   <App/>
+                   {/*<App/>*/}
+
                    <div className="product-introtext on-page editor">
                       {product.description}
                    </div>
@@ -227,12 +228,12 @@ export default class ProductPageItem extends React.Component {
                             <div className="editor">
                                <table className="table table-bordered table-striped table-hover">
                                   <tbody>
-                                     {product.features.map((p, index) =>
-                                         <tr key={index}>
-                                            <td>{p.name}</td>
-                                            <td>{p.value}</td>
-                                         </tr>
-                                     )}
+                                  {product.features.map((p, index) =>
+                                      <tr key={index}>
+                                         <td>{p.name}</td>
+                                         <td>{p.value}</td>
+                                      </tr>
+                                  )}
                                   </tbody>
                                </table>
                             </div>

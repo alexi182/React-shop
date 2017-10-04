@@ -6,6 +6,7 @@ import cartReducers from '../reducers/cart';
 import compareReducers from '../reducers/compare';
 import productsReducers from '../reducers/products';
 import productReducers from '../reducers/product';
+import filterReducers from '../reducers/filter';
 
 const middleWare = applyMiddleware(promise(), thunk, logger);
 
@@ -13,7 +14,8 @@ const reducer = combineReducers({
    cart: cartReducers,
    compare: compareReducers,
    products: productsReducers,
-   product: productReducers
+   product: productReducers,
+   filter: filterReducers
 });
 
 const store = createStore(reducer, middleWare);
