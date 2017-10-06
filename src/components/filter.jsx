@@ -1,8 +1,10 @@
 import {autobind} from 'core-decorators';
+import * as filterActions from '../actions/filter';
+import { connect } from 'react-redux';
 
 const FilterItem = (props) => {
    let select = () => {
-     props.select(props.id);
+      props.select(props.id);
    };
 
    return (
@@ -13,15 +15,21 @@ const FilterItem = (props) => {
    )
 };
 
+
+@connect (store => {
+   return {
+      filter: store.filter,
+   }
+})
 @autobind()
 export default class Filter extends React.Component{
    constructor(props) {
       super(props);
 
+      this.filters = this.props.values;
+
       this.state = {
-         filters: this.props.values, //передал из sidebar.jsx  45с.
-         opened: false,
-         selected: []
+         opened: false
       }
    }
 
@@ -32,24 +40,28 @@ export default class Filter extends React.Component{
    }
 
    select(id) {
-      let filters = this.state.filters.slice();
-      let selected = this.state.selected.slice();
+      let filters = this.filters.slice();
       let filter = filters[id] || null;
 
-      if (selected.includes(filter)) {
-         selected = selected.filter(e => e!==filter);
-      } else {
-         selected.push(filter)
+      if(filter == null) {
+         return;
       }
+      let toDispatch = filterActions.addFilter({
+         name: this.props.name, filter
+      });
 
-      this.setState ({
-         selected
-      })
+      this.props.dispatch(toDispatch);
    }
 
    render() {
-      let filters = this.state.filters.map((f, index) =>
-          <FilterItem value={f} selected={this.state.selected.includes(f)} id={index} select={this.select} key={index} />);
+      let filters = this.filters.map((f, index) =>{
+         let filter = this.props.filter.selected.find(el => el.name == this.props.name);
+         let selected = false;
+         if (filter) {
+            selected = filter.filters.includes(f);
+         }
+         return <FilterItem value={f} selected={selected} id={index} select={this.select} key={index} />
+      });
 
       let filterClass = this.state.opened ? "is-open" : "is-close";
       let buttonClass = this.state.opened ? "is-active" : "";

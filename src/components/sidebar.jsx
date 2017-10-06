@@ -2,8 +2,16 @@ import Menu from '../components/menu/menu';
 import MenuContainer from '../components/menu/menu-container';
 import MenuItem from '../components/menu/menu-item';
 import Filter from '../components/filter';
+import * as filterActions from '../actions/filter';
 import axios from 'axios';
+import { connect } from 'react-redux';
 import {autobind} from 'core-decorators';
+
+@connect (store => {
+   return {
+      filter: store.filter,
+   }
+})
 
 @autobind
 export default class SideBar extends React.Component {
@@ -16,22 +24,12 @@ export default class SideBar extends React.Component {
    }
 
    filter() {
-      let filter = this.filterComponets.reduce((p,n,index) => {
-         let selected = n.state.selected;
-         if(selected.length !== 0 ) {
-            p['selected'] = []
-         }
-         p['selected'].push({
-            name: n.props.name,
-            selected
-         });
-
-         return p
-      }, {});
-      filter.type = this.filters.productType;
+      console.log(this.props);
+      let toDispatch = filterActions.filter(this.props.selected);
+      this.props.dispatch(toDispatch);
    }
 
-   componentDidMount() {
+   componentDidMount(){
       let Path = window.location.pathname.split('/').pop();
 
       axios.get('http://localhost:8085/api/filters/'+Path.substr(0, Path.length-1))
@@ -44,14 +42,12 @@ export default class SideBar extends React.Component {
    }
 
    render() {
-
       if(!this.state.isReady) return <div>Loading</div>;
 
-      this.filterComponets = this.filters.features.map((item, index) => (
+      this.filterComponents = this.filters.features.map((item, index) => (
               <Filter {...item} key={index} />
           )
       );
-
       return (
           <div className="page-sidebar cell-3 cell-4-md hide-sm">
              <div className="collection-menu-wrapper sidebar-block">
@@ -74,14 +70,14 @@ export default class SideBar extends React.Component {
                 </MenuContainer>
              </div>
 
-             <form className="collection-filter " action="#" method="get">
+             <form className="collection-filter" action="#" method="get">
                 <div className="collection-filter-header">
                    Фильтр
                 </div>
 
-                {this.filterComponets}
+                {this.filterComponents}
 
-                <button type="submit" className="filter-submit button is-primary" onClick={this.filter}>Применить</button>
+                <button type="button" className="filter-submit button is-primary" onClick={this.filter}>Применить</button>
              </form>
           </div>
       );

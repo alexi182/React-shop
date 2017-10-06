@@ -70,11 +70,10 @@ export default class ProductPage extends React.Component{
                    <form className="collection-order-wrapper" action="#" method="get">
                       <div className="collection-order is-page-size">
                          <label className="label-field">Показывать по</label>
-                         <select className="select-field js-filter-trigger" name="page_size">
-                            <option value="12">12</option>
-                            <option value="24">24</option>
-                            <option value="48">48</option>
-                            <option value="96">96</option>
+                         <select className="select-field js-filter-trigger">
+                            <option value="12">3</option>
+                            <option value="24">6</option>
+                            <option value="48">все</option>
                          </select>
                       </div>
                    </form>

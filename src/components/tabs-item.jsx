@@ -106,15 +106,12 @@ class Tabs extends React.Component {
 
    renderTab = (selectedIndex) => (item, key) => {
       return (
-          <li
-              className={`tabItem ${selectedIndex === key ? 'active' : ''}` }
-              key={key}
+          <li className={`tabItem ${selectedIndex === key ? 'active' : ''}` } key={key}
               onClick={() => {
                  this.setState({
                     selectedIndex: key
                  });
-              }}
-          >
+              }} >
              {item.title}
           </li>
       );
@@ -149,7 +146,7 @@ export default class App extends React.Component {
    render() {
       return (
           <div>
-             <Tabs tabsItems={tabsItems} />  //опровкидываем json данные в компонент Tabs
+             <Tabs tabsItems={tabsItems} />
           </div>
       );
    }

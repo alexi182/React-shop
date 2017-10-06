@@ -14734,7 +14734,6 @@ var ProductPageItem = (_dec = (0, _reactRedux.connect)(function (store) {
                React.createElement(
                   'div',
                   { className: 'product-content-wrapper cell-7 cell-12-sm' },
-                  React.createElement(_tabsItem2.default, null),
                   React.createElement(
                      'div',
                      { className: 'product-introtext on-page editor' },
@@ -15167,26 +15166,21 @@ var ProductPage = (_dec = (0, _reactRedux.connect)(function (store) {
                         ),
                         React.createElement(
                            'select',
-                           { className: 'select-field js-filter-trigger', name: 'page_size' },
+                           { className: 'select-field js-filter-trigger' },
                            React.createElement(
                               'option',
                               { value: '12' },
-                              '12'
+                              '3'
                            ),
                            React.createElement(
                               'option',
                               { value: '24' },
-                              '24'
+                              '6'
                            ),
                            React.createElement(
                               'option',
                               { value: '48' },
-                              '48'
-                           ),
-                           React.createElement(
-                              'option',
-                              { value: '96' },
-                              '96'
+                              '\u0432\u0441\u0435'
                            )
                         )
                      )
@@ -15444,6 +15438,13 @@ var Cart = (_dec = (0, _reactRedux.connect)(function (store) {
          };
       };
 
+      _this.order = function (id) {
+         return function () {
+            var toDispatch = actions.makeOrder(id);
+            _this.props.dispatch(toDispatch);
+         };
+      };
+
       _this.inc = function (id) {
          return function () {
             var toDispatch = actions.inc(id);
@@ -15629,8 +15630,8 @@ var Cart = (_dec = (0, _reactRedux.connect)(function (store) {
                         )
                      ),
                      React.createElement(
-                        'button',
-                        { type: 'submit', className: 'cart-checkout button is-primary', 'data-cart-submit': '' },
+                        _reactRouter.Link,
+                        { to: '/order', type: 'submit', className: 'cart-checkout button is-primary' /*{onClick={this.order(item.product.id)}}*/ },
                         '\u041E\u0444\u043E\u0440\u043C\u0438\u0442\u044C \u0437\u0430\u043A\u0430\u0437'
                      )
                   )
@@ -16465,6 +16466,10 @@ var _product = __webpack_require__(193);
 
 var _product2 = _interopRequireDefault(_product);
 
+var _filter = __webpack_require__(377);
+
+var _filter2 = _interopRequireDefault(_filter);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var middleWare = (0, _redux.applyMiddleware)((0, _reduxPromiseMiddleware2.default)(), _reduxThunk2.default, _reduxLogger2.default);
@@ -16473,7 +16478,8 @@ var reducer = (0, _redux.combineReducers)({
    cart: _cart2.default,
    compare: _compare2.default,
    products: _products2.default,
-   product: _product2.default
+   product: _product2.default,
+   filter: _filter2.default
 });
 
 var store = (0, _redux.createStore)(reducer, middleWare);
@@ -16498,6 +16504,8 @@ __webpack_require__(212);
 __webpack_require__(213);
 
 __webpack_require__(214);
+
+__webpack_require__(378);
 
 /***/ }),
 /* 162 */
@@ -17553,9 +17561,17 @@ exports.default = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _dec, _class;
+var _dec, _dec2, _class;
 
 var _coreDecorators = __webpack_require__(22);
+
+var _filter = __webpack_require__(376);
+
+var filterActions = _interopRequireWildcard(_filter);
+
+var _reactRedux = __webpack_require__(26);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -17569,18 +17585,22 @@ var FilterItem = function FilterItem(props) {
    };
 
    return React.createElement(
-      "li",
-      { className: "filter-item" },
-      React.createElement("input", { className: "filter-field checkbox-field", type: "checkbox", checked: props.selected }),
+      'li',
+      { className: 'filter-item' },
+      React.createElement('input', { className: 'filter-field checkbox-field', type: 'checkbox', checked: props.selected }),
       React.createElement(
-         "label",
-         { className: "filter-label checkbox-label", "data-id": props.id, onClick: select },
+         'label',
+         { className: 'filter-label checkbox-label', 'data-id': props.id, onClick: select },
          props.value
       )
    );
 };
 
-var Filter = (_dec = (0, _coreDecorators.autobind)(), _dec(_class = function (_React$Component) {
+var Filter = (_dec = (0, _reactRedux.connect)(function (store) {
+   return {
+      filter: store.filter
+   };
+}), _dec2 = (0, _coreDecorators.autobind)(), _dec(_class = _dec2(_class = function (_React$Component) {
    _inherits(Filter, _React$Component);
 
    function Filter(props) {
@@ -17588,74 +17608,77 @@ var Filter = (_dec = (0, _coreDecorators.autobind)(), _dec(_class = function (_R
 
       var _this = _possibleConstructorReturn(this, (Filter.__proto__ || Object.getPrototypeOf(Filter)).call(this, props));
 
+      _this.filters = _this.props.values;
+
       _this.state = {
-         filters: _this.props.values, //передал из sidebar.jsx  45с.
-         opened: false,
-         selected: []
+         opened: false
       };
       return _this;
    }
 
    _createClass(Filter, [{
-      key: "click",
+      key: 'click',
       value: function click() {
          this.setState({
             opened: !this.state.opened
          });
       }
    }, {
-      key: "select",
+      key: 'select',
       value: function select(id) {
-         var filters = this.state.filters.slice();
-         var selected = this.state.selected.slice();
+         var filters = this.filters.slice();
          var filter = filters[id] || null;
 
-         if (selected.includes(filter)) {
-            selected = selected.filter(function (e) {
-               return e !== filter;
-            });
-         } else {
-            selected.push(filter);
+         if (filter == null) {
+            return;
          }
-
-         this.setState({
-            selected: selected
+         var toDispatch = filterActions.addFilter({
+            name: this.props.name, filter: filter
          });
+
+         this.props.dispatch(toDispatch);
       }
    }, {
-      key: "render",
+      key: 'render',
       value: function render() {
          var _this2 = this;
 
-         var filters = this.state.filters.map(function (f, index) {
-            return React.createElement(FilterItem, { value: f, selected: _this2.state.selected.includes(f), id: index, select: _this2.select, key: index });
+         var filters = this.filters.map(function (f, index) {
+            var filter = _this2.props.filter.selected.find(function (el) {
+               return el.name == _this2.props.name;
+            });
+            var selected = false;
+            if (filter) {
+               selected = filter.filters.includes(f);
+            }
+            return React.createElement(FilterItem, { value: f, selected: selected, id: index, select: _this2.select, key: index });
          });
 
          var filterClass = this.state.opened ? "is-open" : "is-close";
          var buttonClass = this.state.opened ? "is-active" : "";
 
          return React.createElement(
-            "div",
-            { className: "filter " + filterClass },
+            'div',
+            { className: 'filter ' + filterClass },
             React.createElement(
-               "div",
-               { className: "filter-control" },
+               'div',
+               { className: 'filter-control' },
                React.createElement(
-                  "button",
-                  { className: "filter-toggle " + buttonClass, type: "button", onClick: this.click },
+                  'button',
+                  { className: 'filter-toggle ' + buttonClass, type: 'button', onClick: this.click },
                   React.createElement(
-                     "span",
-                     { className: "filter-name" },
+                     'span',
+                     { className: 'filter-name' },
                      this.props.display
                   )
                )
             ),
             React.createElement(
-               "div",
-               { className: "filter-items-wrapper" },
+               'div',
+               { className: 'filter-items-wrapper' },
                React.createElement(
-                  "ul",
-                  { className: "filter-items-list scrollable" },
+                  'ul',
+                  { className: 'filter-items-list scrollable' },
                   filters
                )
             )
@@ -17664,7 +17687,7 @@ var Filter = (_dec = (0, _coreDecorators.autobind)(), _dec(_class = function (_R
    }]);
 
    return Filter;
-}(React.Component)) || _class);
+}(React.Component)) || _class) || _class);
 exports.default = Filter;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
@@ -17969,7 +17992,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _class;
+var _dec, _class;
 
 var _menu = __webpack_require__(51);
 
@@ -17987,11 +18010,19 @@ var _filter = __webpack_require__(184);
 
 var _filter2 = _interopRequireDefault(_filter);
 
+var _filter3 = __webpack_require__(376);
+
+var filterActions = _interopRequireWildcard(_filter3);
+
 var _axios = __webpack_require__(85);
 
 var _axios2 = _interopRequireDefault(_axios);
 
+var _reactRedux = __webpack_require__(26);
+
 var _coreDecorators = __webpack_require__(22);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -18001,7 +18032,11 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var SideBar = (0, _coreDecorators.autobind)(_class = function (_React$Component) {
+var SideBar = (_dec = (0, _reactRedux.connect)(function (store) {
+   return {
+      filter: store.filter
+   };
+}), _dec(_class = (0, _coreDecorators.autobind)(_class = function (_React$Component) {
    _inherits(SideBar, _React$Component);
 
    function SideBar(props) {
@@ -18018,19 +18053,9 @@ var SideBar = (0, _coreDecorators.autobind)(_class = function (_React$Component)
    _createClass(SideBar, [{
       key: 'filter',
       value: function filter() {
-         var filter = this.filterComponets.reduce(function (p, n, index) {
-            var selected = n.state.selected;
-            if (selected.length !== 0) {
-               p['selected'] = [];
-            }
-            p['selected'].push({
-               name: n.props.name,
-               selected: selected
-            });
-
-            return p;
-         }, {});
-         filter.type = this.filters.productType;
+         console.log(this.props);
+         var toDispatch = filterActions.filter(this.props.selected);
+         this.props.dispatch(toDispatch);
       }
    }, {
       key: 'componentDidMount',
@@ -18049,17 +18074,15 @@ var SideBar = (0, _coreDecorators.autobind)(_class = function (_React$Component)
    }, {
       key: 'render',
       value: function render() {
-
          if (!this.state.isReady) return React.createElement(
             'div',
             null,
             'Loading'
          );
 
-         this.filterComponets = this.filters.features.map(function (item, index) {
+         this.filterComponents = this.filters.features.map(function (item, index) {
             return React.createElement(_filter2.default, _extends({}, item, { key: index }));
          });
-
          return React.createElement(
             'div',
             { className: 'page-sidebar cell-3 cell-4-md hide-sm' },
@@ -18095,16 +18118,16 @@ var SideBar = (0, _coreDecorators.autobind)(_class = function (_React$Component)
             ),
             React.createElement(
                'form',
-               { className: 'collection-filter ', action: '#', method: 'get' },
+               { className: 'collection-filter', action: '#', method: 'get' },
                React.createElement(
                   'div',
                   { className: 'collection-filter-header' },
                   '\u0424\u0438\u043B\u044C\u0442\u0440'
                ),
-               this.filterComponets,
+               this.filterComponents,
                React.createElement(
                   'button',
-                  { type: 'submit', className: 'filter-submit button is-primary', onClick: this.filter },
+                  { type: 'button', className: 'filter-submit button is-primary', onClick: this.filter },
                   '\u041F\u0440\u0438\u043C\u0435\u043D\u0438\u0442\u044C'
                )
             )
@@ -18113,8 +18136,7 @@ var SideBar = (0, _coreDecorators.autobind)(_class = function (_React$Component)
    }]);
 
    return SideBar;
-}(React.Component)) || _class;
-
+}(React.Component)) || _class) || _class);
 exports.default = SideBar;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
@@ -18256,15 +18278,12 @@ var Tabs = function (_React$Component2) {
          return function (item, key) {
             return React.createElement(
                'li',
-               {
-                  className: 'tabItem ' + (selectedIndex === key ? 'active' : ''),
-                  key: key,
+               { className: 'tabItem ' + (selectedIndex === key ? 'active' : ''), key: key,
                   onClick: function onClick() {
                      _this2.setState({
                         selectedIndex: key
                      });
-                  }
-               },
+                  } },
                item.title
             );
          };
@@ -18316,8 +18335,7 @@ var App = function (_React$Component3) {
          return React.createElement(
             'div',
             null,
-            React.createElement(Tabs, { tabsItems: tabsItems }),
-            '  //\u043E\u043F\u0440\u043E\u0432\u043A\u0438\u0434\u044B\u0432\u0430\u0435\u043C json \u0434\u0430\u043D\u043D\u044B\u0435 \u0432 \u043A\u043E\u043C\u043F\u043E\u043D\u0435\u043D\u0442 Tabs'
+            React.createElement(Tabs, { tabsItems: tabsItems })
          );
       }
    }]);
@@ -36430,6 +36448,10 @@ var _cart = __webpack_require__(151);
 
 var _cart2 = _interopRequireDefault(_cart);
 
+var _order = __webpack_require__(375);
+
+var _order2 = _interopRequireDefault(_order);
+
 var _compare = __webpack_require__(156);
 
 var _compare2 = _interopRequireDefault(_compare);
@@ -36470,6 +36492,7 @@ ReactDOM.render(React.createElement(
             React.createElement(_reactRouter.Redirect, { from: '*', to: '/' })
          ),
          React.createElement(_reactRouter.Route, { path: '/cart', component: _cart2.default }),
+         React.createElement(_reactRouter.Route, { path: '/order', component: _order2.default }),
          React.createElement(_reactRouter.Route, { path: '/compare', component: _compare2.default }),
          React.createElement(_reactRouter.Route, { path: '/payment', component: _payment2.default }),
          React.createElement(_reactRouter.Route, { path: '/product/:id', component: _productPageItem2.default })
@@ -36478,6 +36501,781 @@ ReactDOM.render(React.createElement(
    )
 ), page);
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(162), __webpack_require__(3)))
+
+/***/ }),
+/* 374 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var FILTER = 'PRODUCT_FILTER';
+var ADD = 'PRODUCT_FILTER_ADD';
+
+exports.FILTER = FILTER;
+exports.ADD = ADD;
+
+/***/ }),
+/* 375 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(React) {
+
+Object.defineProperty(exports, "__esModule", {
+   value: true
+});
+exports.default = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _dec, _dec2, _class;
+
+var _reactRouter = __webpack_require__(21);
+
+var _coreDecorators = __webpack_require__(22);
+
+var _reactRedux = __webpack_require__(26);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Order = (_dec = (0, _reactRedux.connect)(function (store) {
+   return store.cart;
+}), _dec2 = (0, _coreDecorators.autobind)(), _dec(_class = _dec2(_class = function (_React$Component) {
+   _inherits(Order, _React$Component);
+
+   function Order(props) {
+      _classCallCheck(this, Order);
+
+      return _possibleConstructorReturn(this, (Order.__proto__ || Object.getPrototypeOf(Order)).call(this, props));
+   }
+
+   _createClass(Order, [{
+      key: 'render',
+      value: function render() {
+         return React.createElement(
+            'div',
+            { className: 'page-content' },
+            React.createElement(
+               'div',
+               { className: 'checkout-v2-wrapper co-section--checkout_content' },
+               React.createElement(
+                  'div',
+                  { className: 'co-section--checkout_order co-section--checkout_order_sided' },
+                  React.createElement(
+                     'div',
+                     { className: 'co-section--checkout_header co-checkout-block--padded' },
+                     React.createElement(
+                        'div',
+                        { className: 'decorated-title-wrapper co-checkout-title' },
+                        React.createElement(
+                           'h1',
+                           { className: 'decorated-title co-title co-title--h1' },
+                           ' \u041E\u0444\u043E\u0440\u043C\u043B\u0435\u043D\u0438\u0435 \u0437\u0430\u043A\u0430\u0437\u0430'
+                        )
+                     ),
+                     React.createElement(
+                        'div',
+                        { className: 'co-breadcrumbs' },
+                        React.createElement(
+                           'a',
+                           { href: '/cart_items', className: 'link co-breadcrumbs-page' },
+                           '\u041A\u043E\u0440\u0437\u0438\u043D\u0430'
+                        ),
+                        React.createElement('span', { className: 'co-breadcrumbs-pipe co-icon halfling-menu-right' }),
+                        React.createElement(
+                           'span',
+                           { className: 'co-breadcrumbs-page' },
+                           '\u041E\u0444\u043E\u0440\u043C\u043B\u0435\u043D\u0438\u0435 \u0437\u0430\u043A\u0430\u0437\u0430'
+                        )
+                     )
+                  ),
+                  React.createElement(
+                     'div',
+                     { className: 'co-sidebar-wrapper' },
+                     React.createElement(
+                        'div',
+                        { className: 'co-sidebar co-sidebar--hidden@sm js-co-sidebar co-sidebar--fixed' },
+                        React.createElement(
+                           'div',
+                           { className: 'co-basket co-checkout-block--padded' },
+                           React.createElement(
+                              'div',
+                              { className: 'co-basket_item-list' },
+                              React.createElement(
+                                 'div',
+                                 { className: 'co-basket_item' },
+                                 React.createElement(
+                                    'div',
+                                    { className: 'co-basket_item-image_container' },
+                                    React.createElement(
+                                       'div',
+                                       { className: 'co-basket_item-image' },
+                                       React.createElement('img', { alt: 'image', src: 'https://static-eu.insales.ru/images/products/1/7130/102226906/thumb_\u0411\u0435\u0437_\u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044F.jpg' })
+                                    )
+                                 ),
+                                 React.createElement(
+                                    'div',
+                                    { className: 'co-basket_item-description' },
+                                    '\u041F\u043B\u0430\u043D\u0448\u0435\u0442 APPLE iPad mini with Retina display (\u0421\u0435\u0440\u044B\u0439)'
+                                 ),
+                                 React.createElement(
+                                    'div',
+                                    { className: 'co-basket_item-total' },
+                                    React.createElement(
+                                       'span',
+                                       { className: 'co-basket_item-count' },
+                                       '1'
+                                    ),
+                                    ' x',
+                                    React.createElement(
+                                       'span',
+                                       { className: 'co-basket_item-price co-price--current' },
+                                       '33985\xA0\u0440\u0443\u0431'
+                                    )
+                                 )
+                              )
+                           ),
+                           React.createElement(
+                              'div',
+                              { className: 'co-basket_subtotal-list' },
+                              React.createElement(
+                                 'div',
+                                 { className: 'co-basket_subtotal' },
+                                 React.createElement(
+                                    'div',
+                                    { className: 'co-basket_subtotal-title' },
+                                    '\u0421\u0443\u043C\u043C\u0430 \u043F\u043E \u0442\u043E\u0432\u0430\u0440\u0430\u043C'
+                                 ),
+                                 React.createElement(
+                                    'div',
+                                    { className: 'co-basket_subtotal-price co-price--current', id: 'items_price' },
+                                    '33985\xA0\u0440\u0443\u0431'
+                                 )
+                              ),
+                              React.createElement(
+                                 'div',
+                                 { className: 'co-basket_subtotal' },
+                                 React.createElement(
+                                    'div',
+                                    { className: 'co-basket_subtotal-title' },
+                                    '\u0421\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0438'
+                                 ),
+                                 React.createElement(
+                                    'div',
+                                    { className: 'co-basket_subtotal-price co-price--current', id: 'delivery_price' },
+                                    '200\xA0\u0440\u0443\u0431'
+                                 )
+                              )
+                           ),
+                           React.createElement(
+                              'div',
+                              { className: 'co-basket_total' },
+                              React.createElement(
+                                 'div',
+                                 { className: 'co-basket_total-title' },
+                                 '\u0418\u0442\u043E\u0433\u043E:'
+                              ),
+                              React.createElement(
+                                 'div',
+                                 { className: 'co-basket_total-price co-price--current', id: 'total_price' },
+                                 '34185\xA0\u0440\u0443\u0431'
+                              )
+                           )
+                        )
+                     )
+                  ),
+                  React.createElement(
+                     'form',
+                     { action: '/', className: 'co-checkout-order_form co-checkout-block--padded ru-mask' },
+                     React.createElement(
+                        'div',
+                        null,
+                        React.createElement('input', { type: 'hidden', value: '\u2713' })
+                     ),
+                     React.createElement(
+                        'div',
+                        { className: 'co-delivery_method-list co-checkout-block' },
+                        React.createElement(
+                           'div',
+                           { className: 'co-checkout-block' },
+                           React.createElement(
+                              'div',
+                              { className: 'co-input co-input--required co-input--tel' },
+                              React.createElement(
+                                 'h2',
+                                 { className: 'co-input-label co-title co-title--h2' },
+                                 '\u041A\u043E\u043D\u0442\u0430\u043A\u0442\u043D\u044B\u0439 \u0442\u0435\u043B\u0435\u0444\u043E\u043D'
+                              ),
+                              React.createElement('input', { className: 'co-input-field js-input-field', type: 'tel', value: '' }),
+                              React.createElement(
+                                 'div',
+                                 { className: 'co-input-description' },
+                                 '\u0423\u0436\u0435 \u043F\u043E\u043A\u0443\u043F\u0430\u043B\u0438 \u0443 \u043D\u0430\u0441?',
+                                 React.createElement(
+                                    'a',
+                                    { className: 'link', href: '#' },
+                                    '\u0412\u043E\u0439\u0434\u0438\u0442\u0435'
+                                 ),
+                                 '\u043A\u0430\u043A \u043A\u043B\u0438\u0435\u043D\u0442'
+                              )
+                           )
+                        ),
+                        React.createElement(
+                           'div',
+                           { className: 'co-checkout-block' },
+                           React.createElement(
+                              'div',
+                              null,
+                              React.createElement('input', { type: 'hidden', value: '' })
+                           ),
+                           React.createElement(
+                              'div',
+                              { className: 'co-input co-input--required' },
+                              React.createElement(
+                                 'h2',
+                                 { className: 'co-input-label co-title co-title--h2' },
+                                 '\u041D\u0430\u0441\u0435\u043B\u0435\u043D\u043D\u044B\u0439 \u043F\u0443\u043D\u043A\u0442'
+                              ),
+                              React.createElement('input', { id: 'shipping_address_country', type: 'hidden', value: '' }),
+                              React.createElement(
+                                 'div',
+                                 { className: 'co-input co-input--required co-input--text co-input--full_locality_name co-input--nested ' },
+                                 React.createElement(
+                                    'label',
+                                    { className: 'co-input-label' },
+                                    '\u041D\u0430\u0441\u0435\u043B\u0435\u043D\u043D\u044B\u0439 \u043F\u0443\u043D\u043A\u0442'
+                                 ),
+                                 React.createElement('input', { className: 'co-input-field', type: 'text', value: '' })
+                              )
+                           )
+                        ),
+                        React.createElement(
+                           'div',
+                           { id: 'hidden-data' },
+                           React.createElement('input', { id: 'default_delivery_variant_id', type: 'hidden', value: '' })
+                        ),
+                        React.createElement(
+                           'div',
+                           { className: 'variants delivery_variants co-input co-input--required co-input--radio co-tabs' },
+                           React.createElement(
+                              'h3',
+                              { className: 'co-title co-title--h2 co-tabs-header' },
+                              '\u0421\u043F\u043E\u0441\u043E\u0431 \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0438'
+                           ),
+                           React.createElement(
+                              'div',
+                              { className: 'co-tabs-controls', id: 'delivery-type-switch' },
+                              React.createElement('input', { name: 'shipping_address[no_delivery]', type: 'hidden', value: '0' }),
+                              React.createElement(
+                                 'button',
+                                 { className: 'co-tabs-node co-tabs-node--active', type: 'button' },
+                                 '\u0414\u043E\u0441\u0442\u0430\u0432\u043A\u0430'
+                              ),
+                              React.createElement(
+                                 'button',
+                                 { className: 'co-tabs-node', type: 'button' },
+                                 '\u0421\u0430\u043C\u043E\u0432\u044B\u0432\u043E\u0437'
+                              )
+                           ),
+                           React.createElement(
+                              'div',
+                              { className: 'co-tabs-content co-tabs-content--active', id: 'tabs-need-address' },
+                              React.createElement(
+                                 'label',
+                                 { className: 'co-delivery_method co-input-wrapper co-toggable_field co-toggable_field--bordered' },
+                                 React.createElement(
+                                    'span',
+                                    { className: 'radio co-delivery_method-input co-toggable_field-input co-toggable_field-input--radio' },
+                                    React.createElement('input', { checked: 'checked', className: 'radio_button js-input-field', type: 'radio', value: '766247' })
+                                 ),
+                                 React.createElement(
+                                    'span',
+                                    { className: 'co-toggable_field-information co-delivery_method-information' },
+                                    React.createElement(
+                                       'span',
+                                       { className: 'co-delivery_method-title co-toggable_field-title co-input-title' },
+                                       '\u041A\u0443\u0440\u044C\u0435\u0440\u043E\u043C'
+                                    ),
+                                    React.createElement(
+                                       'span',
+                                       { className: 'co-delivery_method-description co-toggable_field-description co-input-description', id: 'delivery_description_766247' },
+                                       React.createElement(
+                                          'p',
+                                          null,
+                                          '\u0414\u043E\u0441\u0442\u0430\u0432\u043A\u0430 \u043A\u0443\u0440\u044C\u0435\u0440\u043E\u043C\xA0'
+                                       )
+                                    ),
+                                    React.createElement('span', { className: 'co-delivery_method-description co-toggable_field-description co-input-description' }),
+                                    React.createElement('span', { className: 'co-delivery_method-description co-toggable_field-description co-input-description' }),
+                                    React.createElement('div', { id: 'delivery_error_766247' })
+                                 ),
+                                 React.createElement(
+                                    'span',
+                                    { className: 'co-delivery_method-price co-toggable_field-price co-price--current', id: 'price_766247', 'data-price': '200' },
+                                    '+ 200\xA0\u0440\u0443\u0431'
+                                 )
+                              )
+                           ),
+                           React.createElement(
+                              'div',
+                              { className: 'co-tabs-content', id: 'tabs-pickup' },
+                              React.createElement(
+                                 'label',
+                                 { className: 'co-delivery_method co-input-wrapper co-toggable_field co-toggable_field--bordered', htmlFor: 'order_delivery_variant_id_766248' },
+                                 React.createElement(
+                                    'span',
+                                    { className: 'radio co-delivery_method-input co-toggable_field-input co-toggable_field-input--radio' },
+                                    React.createElement('input', { className: 'radio_button js-input-field', type: 'radio', value: '' })
+                                 ),
+                                 React.createElement(
+                                    'span',
+                                    { className: 'co-toggable_field-information co-delivery_method-information' },
+                                    React.createElement(
+                                       'span',
+                                       { className: 'co-delivery_method-title co-toggable_field-title co-input-title' },
+                                       '\u0421\u0430\u043C\u043E\u0432\u044B\u0432\u043E\u0437'
+                                    ),
+                                    React.createElement(
+                                       'span',
+                                       { className: 'co-delivery_method-description co-toggable_field-description co-input-description', id: 'delivery_description_766248' },
+                                       React.createElement(
+                                          'p',
+                                          null,
+                                          '\u041D\u0430 \u043F\u0443\u043A\u043D\u0442\u0435 \u0432\u044B\u0434\u0430\u0447\u0438'
+                                       )
+                                    ),
+                                    React.createElement('span', { className: 'co-delivery_method-description co-toggable_field-description co-input-description', id: 'delivery_interval_766248' }),
+                                    React.createElement('span', { className: 'co-delivery_method-description co-toggable_field-description co-input-description', id: 'delivery_details_766248' }),
+                                    React.createElement('div', { id: 'delivery_error_766248' })
+                                 ),
+                                 React.createElement(
+                                    'span',
+                                    { className: 'co-delivery_method-price co-toggable_field-price co-price--current', id: 'price_766248', 'data-price': '0' },
+                                    '+ 0\xA0\u0440\u0443\u0431'
+                                 )
+                              )
+                           )
+                        ),
+                        React.createElement(
+                           'div',
+                           { className: 'co-delivery_adress', id: 'shipping_address' },
+                           React.createElement(
+                              'h3',
+                              { className: 'co-title co-title--h2' },
+                              '\u0410\u0434\u0440\u0435\u0441 \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0438'
+                           ),
+                           React.createElement(
+                              'div',
+                              { className: 'co-delivery_adress-form' },
+                              React.createElement(
+                                 'div',
+                                 { className: 'co-input co-input--textarea co-input--address co-input--nested co-input--empty_nested' },
+                                 React.createElement(
+                                    'label',
+                                    { className: 'co-input-label' },
+                                    '\u0410\u0434\u0440\u0435\u0441'
+                                 ),
+                                 React.createElement('textarea', { className: 'co-input-field', rows: '2' }),
+                                 React.createElement(
+                                    'div',
+                                    { className: 'co-input-notice co-notice--danger' },
+                                    '\u041F\u043E\u043B\u0435 \u043D\u0435 \u0437\u0430\u043F\u043E\u043B\u043D\u0435\u043D\u043E'
+                                 )
+                              )
+                           )
+                        ),
+                        React.createElement(
+                           'div',
+                           { className: 'co-checkout-block' },
+                           React.createElement(
+                              'div',
+                              { className: 'co-input co-input--textarea co-input--comment co-input--nested co-input--empty_nested' },
+                              React.createElement(
+                                 'label',
+                                 { className: 'co-input-label', htmlFor: 'order_comment' },
+                                 React.createElement(
+                                    'label',
+                                    { htmlFor: 'order_comment' },
+                                    '\u041A\u043E\u043C\u043C\u0435\u043D\u0442\u0430\u0440\u0438\u0438 \u043A \u0437\u0430\u043A\u0430\u0437\u0443'
+                                 )
+                              ),
+                              React.createElement('textarea', { autocomplite: 'off', className: 'co-input-field js-input-field', id: 'order_comment', name: 'order[comment]', rows: '2' })
+                           )
+                        ),
+                        React.createElement(
+                           'div',
+                           { className: 'co-customer co-checkout-block co-tabs' },
+                           React.createElement(
+                              'h3',
+                              { className: 'co-title co-title--h2 co-tabs-header' },
+                              '\u041F\u043E\u043A\u0443\u043F\u0430\u0442\u0435\u043B\u044C'
+                           ),
+                           React.createElement(
+                              'div',
+                              { className: 'co-tabs-controls co-tabs-controls--customer' },
+                              React.createElement(
+                                 'button',
+                                 { className: 'co-tabs-node co-tabs-node--active js-tabs-node--switch', 'data-target': '#tabs-person', type: 'button' },
+                                 '\u0427\u0430\u0441\u0442\u043D\u043E\u0435 \u043B\u0438\u0446\u043E'
+                              ),
+                              React.createElement(
+                                 'button',
+                                 { className: 'co-tabs-node js-tabs-node--switch', 'data-target': '#tabs-organization', type: 'button' },
+                                 '\u041E\u0440\u0433\u0430\u043D\u0438\u0437\u0430\u0446\u0438\u044F'
+                              )
+                           ),
+                           React.createElement(
+                              'div',
+                              { className: 'co-tabs-content co-tabs-content--active', id: 'tabs-person' },
+                              React.createElement('input', { id: 'client_human_type_individual', name: 'client[human_type]', type: 'hidden', value: 'individual' }),
+                              React.createElement(
+                                 'div',
+                                 { className: 'co-input co-input--required co-input--text co-input--name co-input--nested co-input--empty_nested' },
+                                 React.createElement(
+                                    'label',
+                                    { className: 'co-input-label', htmlFor: 'client_name' },
+                                    '\u041A\u043E\u043D\u0442\u0430\u043A\u0442\u043D\u043E\u0435 \u043B\u0438\u0446\u043E (\u0424\u0418\u041E)'
+                                 ),
+                                 React.createElement('input', { className: 'co-input-field js-input-field', autocomplite: 'off', type: 'text', id: 'client_name', name: 'client[name]', value: '' }),
+                                 React.createElement(
+                                    'div',
+                                    { className: 'co-input-notice co-notice--danger' },
+                                    '\u041F\u043E\u043B\u0435 \u043D\u0435 \u0437\u0430\u043F\u043E\u043B\u043D\u0435\u043D\u043E'
+                                 )
+                              ),
+                              React.createElement(
+                                 'div',
+                                 { className: 'co-input co-input--text co-input--email co-input--nested co-input--empty_nested' },
+                                 React.createElement(
+                                    'label',
+                                    { className: 'co-input-label', htmlFor: 'client_email' },
+                                    'E-mail'
+                                 ),
+                                 React.createElement('input', { className: 'co-input-field js-input-field', autocomplite: 'off', type: 'text', id: 'client_email', name: 'client[email]', value: '' }),
+                                 React.createElement(
+                                    'div',
+                                    { className: 'co-input-notice co-notice--danger' },
+                                    '\u041F\u043E\u043B\u0435 \u043D\u0435 \u0437\u0430\u043F\u043E\u043B\u043D\u0435\u043D\u043E'
+                                 )
+                              )
+                           ),
+                           React.createElement('div', { className: 'co-tabs-content ', id: 'tabs-organization' }),
+                           React.createElement('input', { id: 'client_registered', name: 'client[registered]', type: 'hidden', value: '0' }),
+                           React.createElement(
+                              'div',
+                              { className: 'co-input co-input--checkbox' },
+                              React.createElement(
+                                 'label',
+                                 { className: 'co-toggable_field', htmlFor: 'register' },
+                                 React.createElement(
+                                    'span',
+                                    { className: 'co-toggable_field-input co-toggable_field-input--checkbox' },
+                                    React.createElement('input', { name: 'client[registered]', type: 'hidden', value: '0' }),
+                                    React.createElement('input', { className: 'co-input-checkbox', id: 'register', type: 'checkbox', value: '1' })
+                                 ),
+                                 React.createElement(
+                                    'span',
+                                    { className: 'co-input-information co-toggable_field-information' },
+                                    React.createElement(
+                                       'span',
+                                       { className: 'co-input-title co-input-label co-toggable_field-title' },
+                                       '\u0421\u0442\u0430\u0442\u044C \u043F\u043E\u0441\u0442\u043E\u044F\u043D\u043D\u044B\u043C \u043F\u043E\u043A\u0443\u043F\u0430\u0442\u0435\u043B\u0435\u043C'
+                                    )
+                                 ),
+                                 React.createElement(
+                                    'div',
+                                    { className: 'co-input-description co-toggable_field-description' },
+                                    '\u0412\u044B \u0441\u043C\u043E\u0436\u0435\u0442\u0435 \u0432\u0438\u0434\u0435\u0442\u044C \u0438\u0441\u0442\u043E\u0440\u0438\u044E \u0437\u0430\u043A\u0430\u0437\u043E\u0432, \u043F\u0440\u043E\u0449\u0435 \u0434\u0435\u043B\u0430\u0442\u044C \u043D\u043E\u0432\u044B\u0435 \u0438 \u043F\u043E\u043B\u0443\u0447\u0430\u0442\u044C \u0441\u043A\u0438\u0434\u043A\u0438'
+                                 )
+                              )
+                           ),
+                           React.createElement(
+                              'div',
+                              { className: 'co-input co-input--text co-input--required co-input--password not-register co-input--nested co-input--empty_nested' },
+                              React.createElement(
+                                 'label',
+                                 { className: 'co-input-label', htmlFor: 'client_password' },
+                                 '\u041F\u0430\u0440\u043E\u043B\u044C'
+                              ),
+                              React.createElement('input', { className: 'co-input-field js-input-field', id: 'client_password', name: 'client[password]', size: '30', type: 'password' })
+                           ),
+                           React.createElement(
+                              'div',
+                              { className: 'co-input co-input--text co-input--required co-input--password_confirmation not-register co-input--nested co-input--empty_nested' },
+                              React.createElement(
+                                 'label',
+                                 { className: 'co-input-label', htmlFor: 'client_password_confirmation' },
+                                 '\u041F\u043E\u0432\u0442\u043E\u0440\u0438\u0442\u0435 \u043F\u0430\u0440\u043E\u043B\u044C'
+                              ),
+                              React.createElement('input', { className: 'co-input-field js-input-field', id: 'client_password_confirmation', name: 'client[password_confirmation]', size: '30', type: 'password' }),
+                              React.createElement(
+                                 'div',
+                                 { className: 'co-input-notice co-notice--danger' },
+                                 '\u041F\u0430\u0440\u043E\u043B\u044C \u043D\u0435 \u0441\u043E\u0432\u043F\u0430\u0434\u0430\u0435\u0442 \u0441 \u043F\u043E\u0434\u0442\u0432\u0435\u0440\u0436\u0434\u0435\u043D\u0438\u0435\u043C'
+                              )
+                           )
+                        ),
+                        React.createElement(
+                           'div',
+                           { className: 'variants payment_variants co-payment_method-list co-checkout-block', id: 'payment_gateways' },
+                           React.createElement(
+                              'div',
+                              { className: 'co-input co-input--required co-input--radio' },
+                              React.createElement(
+                                 'h3',
+                                 { className: 'co-title co-title--h2 co-input-label' },
+                                 '\u0421\u043F\u043E\u0441\u043E\u0431 \u043E\u043F\u043B\u0430\u0442\u044B'
+                              ),
+                              React.createElement(
+                                 'label',
+                                 { className: 'co-payment_method co-input-wrapper co-toggable_field co-toggable_field--bordered', htmlFor: 'order_payment_gateway_id_478487' },
+                                 React.createElement(
+                                    'span',
+                                    { className: 'co-payment_method-input co-toggable_field-input co-toggable_field-input--radio' },
+                                    React.createElement('input', { checked: 'checked', className: 'radio_button js-input-field', 'data-payment-id': '478487', 'data-payment-position': '1', id: 'order_payment_gateway_id_478487', name: 'order[payment_gateway_id]', type: 'radio', value: '478487' })
+                                 ),
+                                 React.createElement(
+                                    'span',
+                                    { className: 'co-payment_method-information co-toggable_field-information' },
+                                    React.createElement(
+                                       'span',
+                                       { className: 'co-payment_method-title co-toggable_field-title co-input-title' },
+                                       '\u041D\u0430\u043B\u0438\u0447\u043D\u044B\u043C \u043A\u0443\u0440\u044C\u0435\u0440\u0443'
+                                    ),
+                                    React.createElement(
+                                       'span',
+                                       { className: 'co-payment_method-description co-toggable_field-description co-input-description' },
+                                       '\u041D\u0430\u043B\u0438\u0447\u043D\u044B\u043C\u0438 \u043A\u0443\u0440\u044C\u0435\u0440\u0443'
+                                    )
+                                 ),
+                                 React.createElement(
+                                    'span',
+                                    { className: 'co-toggable_field-price co-price--current', id: 'summ_478487', 'data-price': '0' },
+                                    '0\xA0\u0440\u0443\u0431'
+                                 )
+                              ),
+                              React.createElement(
+                                 'div',
+                                 { id: 'payments-not-available' },
+                                 '\u0414\u043B\u044F \u0434\u0430\u043D\u043D\u043E\u0433\u043E \u0441\u043F\u043E\u0441\u043E\u0431\u0430 \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0438 \u043D\u0435\u0442 \u043F\u043E\u0434\u0445\u043E\u0434\u044F\u0449\u0438\u0445 \u0441\u043F\u043E\u0441\u043E\u0431\u043E\u0432 \u043E\u043F\u043B\u0430\u0442\u044B'
+                              )
+                           )
+                        ),
+                        React.createElement('div', { id: 'checkout_result_fields' }),
+                        React.createElement('div', { id: 'checkout_buyer_fields' })
+                     ),
+                     React.createElement(
+                        'div',
+                        { className: 'row center' },
+                        React.createElement(
+                           'button',
+                           { className: 'co-button co-button--checkout js-button-checkout_submit', id: 'create_order', type: 'submit' },
+                           '\u041F\u043E\u0434\u0442\u0432\u0435\u0440\u0434\u0438\u0442\u044C \u0437\u0430\u043A\u0430\u0437'
+                        ),
+                        React.createElement('div', { className: 'consent_to_personal_data_checkbox' })
+                     )
+                  ),
+                  React.createElement('div', { id: 'picker-container' }),
+                  React.createElement(
+                     'div',
+                     { className: 'co-modal co-modal--login co-modal--fixed co-modal--hide' },
+                     React.createElement(
+                        'div',
+                        { className: 'co-modal-wrapper' },
+                        React.createElement('button', { className: 'co-modal-close co-icon halfling-remove js-modal-close' }),
+                        React.createElement(
+                           'h3',
+                           { className: 'co-modal-title co-title co-title--h2' },
+                           '\u0414\u043B\u044F \u043F\u043E\u0441\u0442\u043E\u044F\u043D\u043D\u044B\u0445 \u043F\u043E\u043A\u0443\u043F\u0430\u0442\u0435\u043B\u0435\u0439'
+                        ),
+                        React.createElement(
+                           'div',
+                           { className: 'co-form--login co-modal-login_form' },
+                           React.createElement(
+                              'div',
+                              { className: 'co-input co-input--required co-input--email' },
+                              React.createElement('input', { className: 'co-input-field js-input-field', placeholder: 'E-mail', type: 'email' })
+                           ),
+                           React.createElement(
+                              'div',
+                              { className: 'co-input co-input--required co-input--password' },
+                              React.createElement('input', { className: 'co-input-field js-input-field', placeholder: '\u041F\u0430\u0440\u043E\u043B\u044C', type: 'password' }),
+                              React.createElement(
+                                 'div',
+                                 { className: 'co-input-notice co-notice--danger' },
+                                 '\u0421\u043E\u0447\u0435\u0442\u0430\u043D\u0438\u0435 \u043B\u043E\u0433\u0438\u043D\u0430 \u0438 \u043F\u0430\u0440\u043E\u043B\u044F \u043D\u0435 \u043F\u043E\u0434\u0445\u043E\u0434\u0438\u0442'
+                              )
+                           ),
+                           React.createElement(
+                              'button',
+                              { className: 'co-modal-button co-button js-modal-submit--login', type: 'submit' },
+                              '\u0412\u043E\u0439\u0442\u0438'
+                           ),
+                           React.createElement(
+                              'a',
+                              { href: '/client_account/password/change', className: 'co-button--password_recover' },
+                              '\u0412\u043E\u0441\u0441\u0442\u0430\u043D\u043E\u0432\u0438\u0442\u044C \u043F\u0430\u0440\u043E\u043B\u044C'
+                           )
+                        )
+                     )
+                  ),
+                  React.createElement('div', { className: 'co-overlay' })
+               )
+            )
+         );
+      }
+   }]);
+
+   return Order;
+}(React.Component)) || _class) || _class);
+exports.default = Order;
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ }),
+/* 376 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+   value: true
+});
+exports.addFilter = exports.filter = undefined;
+
+var _filter = __webpack_require__(374);
+
+var constants = _interopRequireWildcard(_filter);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function filter(selected) {
+   return {
+      type: constants.FILTER,
+      payload: {
+         selected: selected
+      }
+   };
+}
+
+function addFilter(_ref) {
+   var name = _ref.name,
+       filter = _ref.filter;
+
+   return {
+      type: constants.ADD,
+      payload: {
+         name: name, filter: filter
+      }
+   };
+}
+
+exports.filter = filter;
+exports.addFilter = addFilter;
+
+/***/ }),
+/* 377 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+   value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+exports.default = filterReducers;
+
+var _filter = __webpack_require__(374);
+
+var constants = _interopRequireWildcard(_filter);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function filterReducers() {
+   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { selected: [] };
+   var action = arguments[1];
+
+
+   switch (action.type) {
+      case constants.FILTER:
+         {
+
+            /*  console.log(state);
+             console.log(action);
+             let filterSelected = state.filterSelected.slice();
+               let filter = filterSelected.reduce((p,n,index)=>{
+             let selected = n.state.selected;
+             if (selected.length !== 0) {
+             p['selected'] = []
+             }
+             p['selected'].push({
+             name: n.props.name,
+             selected
+             });
+             return p
+             },{});
+               state = { ...state, filter };
+             console.log(filter);*/
+            break;
+         }
+      case constants.ADD:
+         {
+            debugger;
+            var selected = state.selected.slice();
+            var _action$payload = action.payload,
+                name = _action$payload.name,
+                filter = _action$payload.filter;
+
+
+            var f = selected.find(function (el) {
+               return el.name == name;
+            });
+
+            if (!f) {
+               f = {
+                  name: name, filters: []
+               };
+               selected.push(f);
+            }
+
+            if (!f.filters.length) {
+               f.filters.push(filter);
+            } else {
+               var s = f.filters.find(function (el) {
+                  return el == filter;
+               });
+               if (!s) {
+                  f.filters.push(s);
+               } else {
+                  f.filters = f.filters.filter(function (el) {
+                     return el !== filter;
+                  });
+               }
+            }
+            state = _extends({}, state, { selected: selected });
+            break;
+         }
+   }
+
+   return state;
+}
+
+/***/ }),
+/* 378 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);
