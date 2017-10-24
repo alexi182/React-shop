@@ -14,11 +14,18 @@ export default class ProductService extends Service{
       //       return response.data
       //    }
       // });
-
    }
 
    getAllProducts(){
       return axios.get(`${super.BaseUrl}${product_prefix}`).then((response) => {
+         if (response && response.data){
+            return response.data
+         }
+      });
+   }
+
+   getFilterProducts(filter){
+      return axios.post(`${super.BaseUrl}${product_prefix}/filter`,filter).then((response) => {
          if (response && response.data){
             return response.data
          }
