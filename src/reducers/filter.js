@@ -5,28 +5,29 @@ export default function filterReducers(state = { selected:[] }, action) {
    switch (action.type) {
       case constants.FILTER: {
 
-         /*  console.log(state);
-          console.log(action);
-          let filterSelected = state.filterSelected.slice();
+         console.log(state);
+         console.log(action);
+         let filterSelected = state.filterSelected.slice();
 
-          let filter = filterSelected.reduce((p,n,index)=>{
-          let selected = n.state.selected;
-          if (selected.length !== 0) {
-          p['selected'] = []
-          }
-          p['selected'].push({
-          name: n.props.name,
-          selected
-          });
-          return p
-          },{});
+         let filter = filterSelected.reduce((p, n, index)=>{
+            let selected = n.state.selected;
+            if (selected.length !== 0) {
+               p['selected'] = []
+            }
+            p['selected'].push({
+               name: n.props.name,
+               selected
+            });
+            return p
+         },{});
 
-          state = { ...state, filter };
-          console.log(filter);*/
+         state = { ...state, filter };
+         console.log(filter);
          break;
       }
+
       case constants.ADD: {
-debugger;
+
          let selected = state.selected.slice();
          let {name, filter} = action.payload;
 
