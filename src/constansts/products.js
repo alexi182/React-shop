@@ -1,4 +1,5 @@
 const FIND = 'PRODUCTS_FIND';
 const GET = 'PRODUCTS_GET';
+const FILTER = 'PRODUCTS_FILTER';
 
-export { FIND,GET };
+export { FIND,GET,FILTER };

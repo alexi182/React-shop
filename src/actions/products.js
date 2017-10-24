@@ -7,7 +7,13 @@ function findProduct(id) {
    return {
       type: productConstants.FIND,
       payload: productService.findProduct(id)
+   }
+}
 
+function getFilterProducts(filters) {
+   return {
+      type: productConstants.FILTER,
+      payload: productService.getFilterProducts(filters)
    }
 }
 
@@ -25,4 +31,4 @@ function getProducts() {
    }
 }
 
-export {findProduct, findProductFeature, getProducts}
+export {findProduct, findProductFeature, getProducts, getFilterProducts}

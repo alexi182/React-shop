@@ -3,6 +3,7 @@ import MenuContainer from '../components/menu/menu-container';
 import MenuItem from '../components/menu/menu-item';
 import Filter from '../components/filter';
 import * as filterActions from '../actions/filter';
+import * as productActions from '../actions/products';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import {autobind} from 'core-decorators';
@@ -25,7 +26,7 @@ export default class SideBar extends React.Component {
 
    filter() {
       console.log(this.props);
-      let toDispatch = filterActions.filter(this.props.selected);
+      let toDispatch = productActions.getFilterProducts(this.props.filter.selected);
       this.props.dispatch(toDispatch);
    }
 
