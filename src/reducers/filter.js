@@ -31,7 +31,6 @@ export default function filterReducers(state = { selected:[] }, action) {
       }
 
       case constants.FILTER: {
-
          let filterSelected = state.selected.slice();
          let filted = action.payload;
 

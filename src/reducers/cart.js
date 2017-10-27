@@ -18,7 +18,7 @@ export default function cartReducers(state = { cart:[], sum:0 }, action) {
             cart.push(action.payload)
          }
 
-          let sum  = countSum(cart);
+         let sum  = countSum(cart);
          // console.log(sum);
 
          state = { ...state, cart, sum };

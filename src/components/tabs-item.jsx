@@ -74,10 +74,7 @@ class Tree extends React.Component {
 
    renderItem = (item, key) => {
       return (
-          <li key={key}>
-				<span	onClick={this.toggleExpanded}>
-					{item.title}
-				</span>
+          <li key={key}><span	onClick={this.toggleExpanded}>{item.title}</span>
              {
                 this.state.expanded && item.treeItems &&
                 <Tree treeItems={item.treeItems} />
@@ -97,7 +94,6 @@ class Tree extends React.Component {
       );
    }
 }
-
 
 class Tabs extends React.Component {
    state = {

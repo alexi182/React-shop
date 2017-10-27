@@ -24,7 +24,7 @@ export default class Cart extends React.Component{
 
    order=(id) => () => {
        let toDispatch = actions.makeOrder(id);
-      this.props.dispatch(toDispatch);
+       this.props.dispatch(toDispatch);
     };
 
    inc=(id) => () => {

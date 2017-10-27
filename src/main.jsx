@@ -31,9 +31,9 @@ ReactDOM.render(
                 <Route path="photos" component={Photos} />
                 <Redirect from="*" to="/" />
              </Route>
-             z
              <Route path="/order" component={Order} />
              <Route path="/compare" component={Compare} />
+             <Route path="/cart" component={Cart} />
              <Route path="/payment" component={Payment} />
              <Route path="/product/:id" component={ProductPageItem} />
           </Route>

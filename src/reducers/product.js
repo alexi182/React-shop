@@ -1,7 +1,6 @@
 import * as constants from '../constansts/product';
 
-export default function productReducer(
-    state = {
+export default function productReducer(state = {
        product:null,
        isFinding:false,
        error: undefined }, action) {

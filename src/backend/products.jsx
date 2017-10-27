@@ -16,7 +16,7 @@ export default class ProductService extends Service{
       // });
    }
 
-   getAllProducts(){
+   getAllProducts(){  //получить все продукты
       return axios.get(`${super.BaseUrl}${product_prefix}`).then((response) => {
          if (response && response.data){
             return response.data
@@ -24,7 +24,7 @@ export default class ProductService extends Service{
       });
    }
 
-   getFilterProducts(filter){
+   getFilterProducts(filter){  //получить отфильтрованные продукты
       return axios.post(`${super.BaseUrl}${product_prefix}/filter`,filter).then((response) => {
          if (response && response.data){
             return response.data

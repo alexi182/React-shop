@@ -17,10 +17,9 @@ export default function compareReducers(state = {
          }
          break;
       }
+
       case constants.DELETE: {
-
          let compare = state.compare.slice();
-
          let compareIndex = compare.findIndex(p => p.id == action.payload);
          if(compareIndex !== -1) {
             compare.splice(compareIndex, 1);
